@@ -6,4 +6,10 @@
     "baseUrl": "."
   },
   "include": ["src"],
+  "ts-node" : {
+    "swc": true
+  },
+  "plugins": [
+    { "name": "@swc/core/typescript" }
+  ]
 }

@@ -6,5 +6,8 @@
     "baseUrl": ".",
     "declaration": true,
   },
-  "include": ["src"]
+  "include": ["src"],
+  "plugins": [
+    { "name": "@swc/core/typescript" }
+  ]
 }
