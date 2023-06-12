@@ -6,7 +6,9 @@
   "scripts": {
     "build": "pnpm -r --stream run build",
     "dev": "pnpm -r --stream run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate-dev": "pnpm --filter api run migrate-dev",
+    "generate": "pnpm --filter api run generate"
   },
   "keywords": [],
   "author": "",

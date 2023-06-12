@@ -37,7 +37,7 @@ Navigate to `/compose` (`cd ./compose`) and Follow the instructions found in [`c
 ### Setup
 
 - Install pnpm: `brew install pnpm`
-- Install dependencies: `brew install pnpm`
+- Install dependencies: `pnpm install`
 <!-- - Set up environment: copy `.env.schema` to `.env` and update environment accordingly. Out-of-the-box values are meant for local development. -->
 - Dev commands:
   - `pnpm run dev` starts local dev servers for UI (localhost:3000) and API (localhost:8080)
