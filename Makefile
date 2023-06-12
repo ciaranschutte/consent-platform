@@ -1,4 +1,8 @@
+# run docker compose file, then run prisma migrations, then start api & ui servers
+start: dcompose
+	pnpm run start
 
+# run docker compose file, then start api & ui servers
 dev: dcompose
 	pnpm run dev
 
