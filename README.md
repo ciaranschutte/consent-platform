@@ -36,10 +36,10 @@ The directory structure is as follows:
 
 ## Environment Variables
 
-| Package | Name           | Description                                                                                                                                                                                         | Type     | Required | Default |
-| ------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
-| `api`   | `DATABASE_URL` | URL for the Postgres DB created by the docker-compose. Syntax should match `postgresql://USER:PASSWORD@HOST:PORT/DATABASE`. The values should match what is used in the `docker-compose.yaml` file. | `string` | Required | `''`    |
-| `api`   | `PORT`         | the port number for the API service                                                                                                                                                                 | `number` | Optional | `8080`  |
+| Package | Name           | Description                                                                                                                                                                          | Type     | Required | Default |
+| ------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------- | ------- |
+| `api`   | `DATABASE_URL` | URL for the Postgres DB. Syntax should match `postgresql://USER:PASSWORD@HOST:PORT/DATABASE`. For local dev, the values should match what is used in the `docker-compose.yaml` file. | `string` | Required | -       |
+| `api`   | `PORT`         | the port number for the API service                                                                                                                                                  | `number` | Optional | `8080`  |
 
 ## Local development
 
