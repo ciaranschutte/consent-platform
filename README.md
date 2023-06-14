@@ -29,10 +29,26 @@ The directory structure is as follows:
         └── src
 ```
 
-### Setup
+### Writing commits
 
-- Install pnpm: `brew install pnpm`
-- Install dependencies: `pnpm install`
+To keep commit messages consistent, we use [gitmoji](https://gitmoji.dev). To easily access emojis on Mac, press ctrl+cmd+space.
+
+<!--
+### Type checking
+
+- `npm run type-check`: trigger TypeScript type check for whole repo
+- `npm run type-check -- --watch`: runs the above with watch mode
+  - Any `npm run type-check` triggers `tsc`, so any flag layed out [here](https://www.typescriptlang.org/docs/handbook/compiler-options.html) can be used
+- If using [vscode](https://code.visualstudio.com/) (recommended), `tsc` can also be run as a task in the editor:
+  - `Cmd+Shift+B`, then select `tsc:build - tsconfig.json`
+  - This will report errors in vscode's `PROBLEMS` tab -->
+
+## Local development
+
+To run the setup locally, ensure you have provided the **required** environment variables, as described in [Environment Variables](#environment-variables). Each package has an `.env.schema` file for reference.
+
+- In the [`/apps/api/` folder](./apps/api/), create an `.env` file
+- In the [`/apps/ui/` folder](./apps/ui/), create and `.env.local` file
 
 ## Environment Variables
 
@@ -41,7 +57,14 @@ The directory structure is as follows:
 | `api`   | `DATABASE_URL` | URL for the Postgres DB. Syntax should match `postgresql://USER:PASSWORD@HOST:PORT/DATABASE`. For local dev, the values should match what is used in the `docker-compose.yaml` file. | `string` | Required | -       |
 | `api`   | `PORT`         | the port number for the API service                                                                                                                                                  | `number` | Optional | `8080`  |
 
-## Local development
+## Setup
+
+- Install pnpm: `brew install pnpm`
+- Install dependencies: `pnpm install`
+
+## Quickstart - DB, Migrations, and Local Servers
+
+This project uses [Postgres](https://www.postgresql.org/) and [Prisma](https://www.prisma.io/docs) for database management. A local postgres db is provided in the [docker-compose](./docker-compose.yaml). The Prisma client is initialized when the `@prisma/client` dependency is installed with `pnpm install`. You can get everything started via manually running [scripts](#with-packagejson-scripts) or using a [Make command](#using-the-makefile):
 
 > **Note**: The `prisma migrate dev` command is for **development mode only** [(See docs reference)](https://www.prisma.io/docs/concepts/components/prisma-migrate/migrate-development-production#create-and-apply-migrations)
 
@@ -78,21 +101,9 @@ Navigate to `/compose` (`cd ./compose`) and Follow the instructions found in [`c
 
 <!-- - Set up environment: copy `.env.schema` to `.env` and update environment accordingly. Out-of-the-box values are meant for local development. -->
 
+Verify everything is running correctly by navigating to [`http://localhost:3000`](http://localhost:3000) for the UI and [`http://localhost:8080`](http://localhost:8080/health) for the API.
+
 ### Dev commands:
 
 - `pnpm run dev` starts local dev servers for UI (localhost:3000) and API (localhost:8080)
 - `pnpm run build` builds type defs, production UI build, API build
-
-### Writing commits
-
-To keep commit messages consistent, we use [gitmoji](https://gitmoji.dev). To easily access emojis on Mac, press ctrl+cmd+space.
-
-<!--
-### Type checking
-
-- `npm run type-check`: trigger TypeScript type check for whole repo
-- `npm run type-check -- --watch`: runs the above with watch mode
-  - Any `npm run type-check` triggers `tsc`, so any flag layed out [here](https://www.typescriptlang.org/docs/handbook/compiler-options.html) can be used
-- If using [vscode](https://code.visualstudio.com/) (recommended), `tsc` can also be run as a task in the editor:
-  - `Cmd+Shift+B`, then select `tsc:build - tsconfig.json`
-  - This will report errors in vscode's `PROBLEMS` tab -->
