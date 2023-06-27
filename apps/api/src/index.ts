@@ -12,9 +12,9 @@ app.get('/health', async (req, res) => {
   res.json({ message: `API is running on port ${port}` });
 });
 
-app.get('/users', async (req, res) => {
-  const users = await prisma.user.findMany();
-  res.json({ users: [users] });
+app.get('/participants', async (req, res) => {
+  const participants = await prisma.participant.findMany();
+  res.json({ participants: [participants] });
 });
 
 app.listen(port, () => {
