@@ -17,23 +17,33 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import express from 'express';
-import { AppConfig } from './config';
+import { Router } from 'express';
 
-import SwaggerRouter from './routers/swagger';
-import HealthRouter from './routers/health';
-import ParticipantRouter from './routers/participants';
+/**
+ * @openapi
+ * tags:
+ *   - name: Health
+ *     description: Health check
+ */
 
-const App = (config: AppConfig) => {
-  const app = express();
-  app.set('port', config.port);
+const router = Router();
 
-  // set up routers
-  app.use('/api-docs', SwaggerRouter);
-  app.use('/health', HealthRouter);
-  app.use('/participants', ParticipantRouter);
+/**
+ * @openapi
+ * /health:
+ *   get:
+ *     tags:
+ *       - Health
+ *     name: Check API Health
+ *     description: Verify API is running
+ *     responses:
+ *       200:
+ *         description: OK
+ *       500:
+ *         description: Server error
+ */
+router.get('/', async (req, res) => {
+  res.json({ message: `API is running.` });
+});
 
-  return app;
-};
-
-export default App;
+export default router;

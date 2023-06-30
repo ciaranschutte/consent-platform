@@ -1,0 +1,88 @@
+/*
+ * Copyright (c) 2023 The Ontario Institute for Cancer Research. All rights reserved
+ *
+ * This program and the accompanying materials are made available under the terms of
+ * the GNU Affero General Public License v3.0. You should have received a copy of the
+ * GNU Affero General Public License along with this program.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+import { Router } from 'express';
+import { PrismaClient } from '@prisma/client';
+
+/**
+ * @openapi
+ * tags:
+ *   - name: Participants
+ *     description: Participant management
+ */
+
+const router = Router();
+const prisma = new PrismaClient();
+
+/**
+ * @openapi
+ * /participants:
+ *   get:
+ *     tags:
+ *       - Participants
+ *     name: Get All Participants
+ *     description: Fetch participant list
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: The list of participants was successfully retrieved.
+ *       401:
+ *         description: Unauthorized. Authorization information is missing or invalid.
+ *       403:
+ *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
+ */
+router.get('/', async (req, res) => {
+  const participants = await prisma.participant.findMany();
+  res.json({ participants: [participants] });
+});
+
+/**
+ * @openapi
+ * /participants/:id:
+ *   get:
+ *     tags:
+ *       - Participants
+ *     name: Get Participant by ID
+ *     description: Fetch one participant
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: The participant was successfully retrieved.
+ *       401:
+ *         description: Unauthorized. Authorization information is missing or invalid.
+ *       403:
+ *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
+ */
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  const participant = await prisma.participant.findUnique({
+    where: {
+      id,
+    },
+  });
+  res.json({ participant });
+});
+
+// create
+// update by id
+// delete by id
+
+export default router;

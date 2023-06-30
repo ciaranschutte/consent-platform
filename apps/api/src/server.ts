@@ -17,23 +17,20 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import express from 'express';
-import { AppConfig } from './config';
+import { Server } from 'http';
 
-import SwaggerRouter from './routers/swagger';
-import HealthRouter from './routers/health';
-import ParticipantRouter from './routers/participants';
+import { getAppConfig } from './config';
+import App from './index';
 
-const App = (config: AppConfig) => {
-  const app = express();
-  app.set('port', config.port);
+let server: Server;
 
-  // set up routers
-  app.use('/api-docs', SwaggerRouter);
-  app.use('/health', HealthRouter);
-  app.use('/participants', ParticipantRouter);
+(async () => {
+  const appConfig = getAppConfig();
+  console.log('Initialize server.ts');
 
-  return app;
-};
-
-export default App;
+  const app = App(appConfig);
+  const port = app.get('port');
+  server = app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
+})();
