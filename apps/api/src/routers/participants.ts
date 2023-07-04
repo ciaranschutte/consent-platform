@@ -18,7 +18,12 @@
  */
 
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+
+import {
+  getLatestParticipantResponseByParticipantIdAndQuestionId,
+  getParticipant,
+  getParticipants,
+} from '../service/search';
 
 /**
  * @openapi
@@ -28,7 +33,6 @@ import { PrismaClient } from '@prisma/client';
  */
 
 const router = Router();
-const prisma = new PrismaClient();
 
 /**
  * @openapi
@@ -49,13 +53,13 @@ const prisma = new PrismaClient();
  *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
  */
 router.get('/', async (req, res) => {
-  const participants = await prisma.participant.findMany();
-  res.json({ participants: [participants] });
+  const participants = await getParticipants();
+  res.send({ participants: [participants] });
 });
 
 /**
  * @openapi
- * /participants/:id:
+ * /participants/{id}:
  *   get:
  *     tags:
  *       - Participants
@@ -63,6 +67,13 @@ router.get('/', async (req, res) => {
  *     description: Fetch one participant
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *      - name: id
+ *        in: path
+ *        description: Participant ID
+ *        required: true
+ *        schema:
+ *          type: string
  *     responses:
  *       200:
  *         description: The participant was successfully retrieved.
@@ -73,16 +84,55 @@ router.get('/', async (req, res) => {
  */
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const participant = await prisma.participant.findUnique({
-    where: {
-      id,
-    },
-  });
-  res.json({ participant });
+  try {
+    const participant = await getParticipant(id);
+    res.status(200).send({ participant });
+  } catch (error) {
+    console.log(error);
+    res.status(404).send({ error: 'Participant not found' });
+  }
 });
 
-// create
-// update by id
-// delete by id
+/**
+ * @openapi
+ * /participants/{id}/consent-questions/{consentQuestionId}:
+ *   get:
+ *     tags:
+ *       - Participants
+ *     name: Get Participant Response by Consent Question ID and Participant ID
+ *     description: Fetch latest participant response
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *      - name: id
+ *        in: path
+ *        description: Participant ID
+ *        required: true
+ *        schema:
+ *          type: string
+ *      - name: consentQuestionId
+ *        in: path
+ *        description: Consent question ID
+ *        required: true
+ *        schema:
+ *          type: string
+ *     responses:
+ *       200:
+ *         description: The latest response was successfully retrieved.
+ *       401:
+ *         description: Unauthorized. Authorization information is missing or invalid.
+ *       403:
+ *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
+ */
+router.get('/:id/consent-questions/:consentQuestionId', async (req, res) => {
+  const { id, consentQuestionId } = req.params;
+  const latestResponse =
+    await getLatestParticipantResponseByParticipantIdAndQuestionId(
+      id,
+      consentQuestionId
+    );
+
+  res.status(200).send({ latestResponse });
+});
 
 export default router;
