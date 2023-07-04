@@ -23,6 +23,7 @@ import { AppConfig } from './config';
 import SwaggerRouter from './routers/swagger';
 import HealthRouter from './routers/health';
 import ParticipantRouter from './routers/participants';
+import ConsentQuestionRouter from './routers/consentQuestions';
 
 const App = (config: AppConfig) => {
   const app = express();
@@ -32,6 +33,7 @@ const App = (config: AppConfig) => {
   app.use('/api-docs', SwaggerRouter);
   app.use('/health', HealthRouter);
   app.use('/participants', ParticipantRouter);
+  app.use('/consent-questions', ConsentQuestionRouter);
 
   return app;
 };

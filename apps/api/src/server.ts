@@ -26,7 +26,7 @@ let server: Server;
 
 (async () => {
   const appConfig = getAppConfig();
-  console.log('Initialize server.ts');
+  console.log('Initializing server.ts');
 
   const app = App(appConfig);
   const port = app.get('port');
