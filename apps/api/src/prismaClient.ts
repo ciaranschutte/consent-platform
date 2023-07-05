@@ -17,29 +17,15 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import express from 'express';
-import bodyParser from 'body-parser';
+import {
+  PrismaClient,
+  ParticipantResponse,
+  Participant,
+  ConsentQuestion,
+} from '@prisma/client';
 
-import { AppConfig } from './config';
-import SwaggerRouter from './routers/swagger';
-import HealthRouter from './routers/health';
-import ParticipantRouter from './routers/participants';
-import ConsentQuestionRouter from './routers/consentQuestions';
-import ParticipantResponseRouter from './routers/participantResponses';
+console.log('Initializing prismaClient.ts');
+const prisma = new PrismaClient();
 
-const App = (config: AppConfig) => {
-  const app = express();
-  app.set('port', config.port);
-  app.use(bodyParser.json());
-
-  // set up routers
-  app.use('/api-docs', SwaggerRouter);
-  app.use('/health', HealthRouter);
-  app.use('/participants', ParticipantRouter);
-  app.use('/consent-questions', ConsentQuestionRouter);
-  app.use('/participant-responses', ParticipantResponseRouter);
-
-  return app;
-};
-
-export default App;
+export { ParticipantResponse, Participant, ConsentQuestion };
+export default prisma;

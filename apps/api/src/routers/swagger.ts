@@ -17,29 +17,54 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import express from 'express';
-import bodyParser from 'body-parser';
+import { Router } from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 
-import { AppConfig } from './config';
-import SwaggerRouter from './routers/swagger';
-import HealthRouter from './routers/health';
-import ParticipantRouter from './routers/participants';
-import ConsentQuestionRouter from './routers/consentQuestions';
-import ParticipantResponseRouter from './routers/participantResponses';
+/**
+ * @openapi
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *   schemas:
+ *     Error:
+ *       type: object
+ *       properties:
+ *         error:
+ *           type: string
+ *         message:
+ *           type: string
+ *       required:
+ *          - code
+ *          - message
+ */
 
-const App = (config: AppConfig) => {
-  const app = express();
-  app.set('port', config.port);
-  app.use(bodyParser.json());
+const options = swaggerJsdoc({
+  failOnErrors: true,
+  definition: {
+    openapi: '3.1.0',
+    info: {
+      title: 'OHCRN Consent API',
+      version: '0.1.0', // TODO: Get this from package.json
+      description: '',
+      license: {
+        name: 'APGL',
+        url: 'https://www.gnu.org/licenses/agpl-3.0.en.html',
+      },
+      servers: [
+        {
+          url: '/',
+        },
+      ],
+    },
+  },
+  apis: ['./src/routers/*'],
+});
 
-  // set up routers
-  app.use('/api-docs', SwaggerRouter);
-  app.use('/health', HealthRouter);
-  app.use('/participants', ParticipantRouter);
-  app.use('/consent-questions', ConsentQuestionRouter);
-  app.use('/participant-responses', ParticipantResponseRouter);
+const router = Router();
+router.use('/', swaggerUi.serve, swaggerUi.setup(options));
 
-  return app;
-};
-
-export default App;
+export default router;
