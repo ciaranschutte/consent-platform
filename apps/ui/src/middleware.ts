@@ -24,6 +24,7 @@ export const config = {
   matcher: [
     // Skip all internal paths (_next)
     '/((?!_next).*)',
+    // '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)',
     // Optional: only run on root (/) URL
     // '/',
     // '/:lang*',
@@ -37,6 +38,8 @@ export function middleware(request: NextRequest) {
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
   // Redirect if there is no locale
+  // this setup will result in a 404 if the locale is not supported, as it will be treated as the pathname
+  // i.e. `/es` would redirect to `/en/es`
   if (pathnameIsMissingLocale) {
     const locale = defaultLanguage;
 

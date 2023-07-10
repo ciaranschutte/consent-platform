@@ -33,3 +33,13 @@ export async function useTranslation(
     i18n: i18nextInstance,
   };
 }
+
+const dictionaries: any = {
+  en: (namespace: string) =>
+    import(`./locales/en/${namespace}.json`).then((module) => module.default),
+  fr: (namespace: string) =>
+    import(`./locales/fr/${namespace}.json`).then((module) => module.default),
+};
+
+export const getDictionary = async (locale: string, namespace: string) =>
+  dictionaries[locale](namespace);

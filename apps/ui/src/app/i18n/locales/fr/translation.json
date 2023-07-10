@@ -1,4 +1,6 @@
 {
-    "title": "Bonjour!",
-    "to-second-page": "Au deuxième page"
+    "title": "Portail d'inscription des patients de l'OHRCN",
+    "greeting": "Bonjour!",
+    "to-second-page": "Au deuxième page",
+    "sample-text": "Exemple de texte pour la page de destination."
 }

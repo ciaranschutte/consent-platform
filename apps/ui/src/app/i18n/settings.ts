@@ -1,7 +1,8 @@
 import { InitOptions } from 'i18next';
 
+export type Language = 'en' | 'fr';
 export const defaultLanguage = 'en';
-export const supportedLanguages = [defaultLanguage, 'fr'];
+export const supportedLanguages: Language[] = [defaultLanguage, 'fr'];
 
 export const defaultNS = 'translation';
 
