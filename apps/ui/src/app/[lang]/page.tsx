@@ -1,39 +1,35 @@
-import Link from 'next/link';
-import { User } from 'common';
+/*
+ * Copyright (c) 2023 The Ontario Institute for Cancer Research. All rights reserved
+ *
+ * This program and the accompanying materials are made available under the terms of
+ * the GNU Affero General Public License v3.0. You should have received a copy of the
+ * GNU Affero General Public License along with this program.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
-import { getDictionary, useTranslation } from '../i18n';
 import Header from '../components/Header';
-
-const user: User = {
-  id: '1',
-  name: 'Homer Simpson',
-  email: 'homersimpson@example.com',
-};
+import { ValidLanguage } from '../i18n/settings';
+import HomeComponent from '../components/Home';
 
 export default async function Home({
   params: { lang },
 }: {
-  params: { lang: string };
+  params: { lang: ValidLanguage };
 }) {
-  const { t } = await useTranslation(lang);
-  // const dict = await getDictionary(lang, 'translation');
   return (
     <>
       <Header lang={lang} />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div>
-          <div>
-            <h1>{t('title')}</h1>
-            <p>{t('sample-text')}</p>
-            <h2>{t('greeting')}</h2>
-            <Link href={`/${lang}/second-page`}>{t('to-second-page')}</Link>
-            {/* <h1>{dict['title']}</h1>
-            <p>{dict['sample-text']}</p>
-            <h2>{dict['greeting']}</h2> */}
-            {/* <Link href={`/${lang}/second-page`}>{dict['to-second-page']}</Link> */}
-          </div>
-        </div>
-      </main>
+      <HomeComponent lang={lang} />
     </>
   );
 }

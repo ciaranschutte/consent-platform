@@ -17,33 +17,19 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { getDictionary } from '../i18n';
-import LanguageToggle from './LanguageToggle';
-import { ValidLanguage, supportedLanguages } from '../i18n/settings';
+import Link from 'next/link';
 
-export const getUnselectedLang = (lang: ValidLanguage): string => {
-  return supportedLanguages.filter((l) => l !== lang)[0];
-};
+import { getDictionary } from '@/app/i18n';
+import { ValidLanguage } from '@/app/i18n/settings';
 
-const Header = async ({ lang }: { lang: ValidLanguage }) => {
-  const dict = await getDictionary(lang, 'header');
-  const langToSelect = getUnselectedLang(lang);
-
+const Second = async ({ lang }: { lang: ValidLanguage }) => {
+  const dict = await getDictionary(lang, 'second-page');
   return (
-    <header
-      style={{
-        margin: '20px 50px 20px 20px',
-        height: '50px',
-        display: 'flex',
-        flex: 1,
-        justifyContent: 'flex-end',
-      }}
-    >
-      <LanguageToggle displayLangToSelect={dict(langToSelect)} selected={lang}>
-        {dict(lang)}
-      </LanguageToggle>
-    </header>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1>{dict('title')}</h1>
+      <Link href={`/${lang}`}>{dict('back-to-home')}</Link>
+    </main>
   );
 };
 
-export default Header;
+export default Second;
