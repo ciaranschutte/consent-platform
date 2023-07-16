@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { getDictionary } from '../i18n';
+import { getTranslation } from '../i18n';
 import LanguageToggle from './LanguageToggle';
 import { ValidLanguage, supportedLanguages } from '../i18n/settings';
 
@@ -26,7 +26,7 @@ export const getUnselectedLang = (lang: ValidLanguage): string => {
 };
 
 const Header = async ({ lang }: { lang: ValidLanguage }) => {
-  const dict = await getDictionary(lang, 'header');
+  const translate = await getTranslation(lang, 'header');
   const langToSelect = getUnselectedLang(lang);
 
   return (
@@ -39,8 +39,11 @@ const Header = async ({ lang }: { lang: ValidLanguage }) => {
         justifyContent: 'flex-end',
       }}
     >
-      <LanguageToggle displayLangToSelect={dict(langToSelect)} selected={lang}>
-        {dict(lang)}
+      <LanguageToggle
+        displayLangToSelect={translate(langToSelect)}
+        selected={lang}
+      >
+        {translate(lang)}
       </LanguageToggle>
     </header>
   );

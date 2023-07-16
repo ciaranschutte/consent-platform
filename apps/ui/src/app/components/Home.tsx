@@ -20,7 +20,7 @@
 import Link from 'next/link';
 import { User } from 'common';
 
-import { getDictionary } from '../i18n';
+import { getTranslation } from '../i18n';
 import { ValidLanguage } from '../i18n/settings';
 
 const user: User = {
@@ -30,13 +30,13 @@ const user: User = {
 };
 
 const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
-  const dict = await getDictionary(lang);
+  const translate = await getTranslation(lang);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>{dict('title')}</h1>
-      <p>{dict('sample-text')}</p>
-      <h2>{dict('greeting', { name: user.name })}</h2>
-      <Link href={`/${lang}/second-page`}>{dict('to-second-page')}</Link>
+      <h1>{translate('title')}</h1>
+      <p>{translate('sample-text')}</p>
+      <h2>{translate('greeting', { name: user.name })}</h2>
+      <Link href={`/${lang}/second-page`}>{translate('to-second-page')}</Link>
     </main>
   );
 };

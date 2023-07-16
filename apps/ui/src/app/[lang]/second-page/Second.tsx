@@ -19,15 +19,15 @@
 
 import Link from 'next/link';
 
-import { getDictionary } from '@/app/i18n';
+import { getTranslation } from '@/app/i18n';
 import { ValidLanguage } from '@/app/i18n/settings';
 
 const Second = async ({ lang }: { lang: ValidLanguage }) => {
-  const dict = await getDictionary(lang, 'second-page');
+  const translate = await getTranslation(lang, 'second-page');
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>{dict('title')}</h1>
-      <Link href={`/${lang}`}>{dict('back-to-home')}</Link>
+      <h1>{translate('title')}</h1>
+      <Link href={`/${lang}`}>{translate('back-to-home')}</Link>
     </main>
   );
 };
