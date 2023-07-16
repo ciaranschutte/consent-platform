@@ -1,22 +1,7 @@
-import { InitOptions } from 'i18next';
+export const supportedLanguages = ['en', 'fr'] as const;
+export type ValidLanguage = (typeof supportedLanguages)[number];
+export const defaultLanguage: ValidLanguage = 'en';
 
-export type Language = 'en' | 'fr';
-export const defaultLanguage = 'en';
-export const supportedLanguages: Language[] = [defaultLanguage, 'fr'];
-
-export const defaultNS = 'translation';
-
-export function getOptions(
-  lang = defaultLanguage,
-  ns = defaultNS
-): InitOptions {
-  return {
-    // debug: true,
-    supportedLngs: supportedLanguages,
-    fallbackLng: defaultLanguage,
-    lng: lang,
-    fallbackNS: defaultNS,
-    defaultNS,
-    ns,
-  };
-}
+export const supportedNamespaces = ['common', 'header', 'second-page'] as const;
+export type ValidNamespace = (typeof supportedNamespaces)[number];
+export const defaultNS: ValidNamespace = 'common';
