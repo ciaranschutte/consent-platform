@@ -55,3 +55,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Optional eslint cache
 .eslintcache
+
+# ignore vscode workspace settings
+*.code-workspace
+.vscode
+
+# ignore test output
+.nyc_output/
