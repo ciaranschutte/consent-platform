@@ -17,10 +17,5 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-export const supportedLanguages = ['en', 'fr'] as const;
-export type ValidLanguage = (typeof supportedLanguages)[number];
-export const defaultLanguage: ValidLanguage = 'en';
-
-export const supportedNamespaces = ['common', 'header', 'second-page'] as const;
-export type ValidNamespace = (typeof supportedNamespaces)[number];
-export const defaultNS: ValidNamespace = 'common';
+export * from './languages';
+export * from './dictionaries';

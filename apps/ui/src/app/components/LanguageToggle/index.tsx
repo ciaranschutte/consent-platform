@@ -21,7 +21,7 @@
 import { ReactNode, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ValidLanguage, defaultLanguage } from '@/app/i18n/settings';
+import { ValidLanguage, defaultLanguage } from '@/i18n/settings';
 import { getUnselectedLang } from '../Header';
 
 const replaceLocaleInUrl = (

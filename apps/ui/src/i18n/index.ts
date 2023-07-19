@@ -17,36 +17,5 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { NextResponse, NextRequest } from 'next/server';
-import { defaultLanguage, supportedLanguages } from '@/i18n/settings';
-
-export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    '/((?!_next).*)',
-    // '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)',
-    // Optional: only run on root (/) URL
-    // '/',
-    // '/:lang*',
-  ],
-};
-
-export function middleware(request: NextRequest) {
-  // Check if there is any supported locale in the pathname
-  const pathname = request.nextUrl.pathname;
-  const pathnameIsMissingLocale = supportedLanguages.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  );
-  // Redirect if there is no locale
-  // this setup will result in a 404 if the locale is not supported, as it will be treated as the pathname
-  // i.e. `/es` would redirect to `/en/es`
-  if (pathnameIsMissingLocale) {
-    const locale = defaultLanguage;
-
-    return NextResponse.redirect(
-      new URL(`/${locale}/${pathname}`, request.url)
-    );
-  }
-
-  return NextResponse.next();
-}
+export * from './types';
+export * from './hooks';

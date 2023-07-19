@@ -17,9 +17,10 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { getTranslation } from '../i18n';
+import { ValidLanguage, getTranslation } from '@/i18n';
+import { supportedLanguages } from '@/i18n/settings';
+
 import LanguageToggle from './LanguageToggle';
-import { ValidLanguage, supportedLanguages } from '../i18n/settings';
 
 export const getUnselectedLang = (lang: ValidLanguage): string => {
   return supportedLanguages.filter((l) => l !== lang)[0];
