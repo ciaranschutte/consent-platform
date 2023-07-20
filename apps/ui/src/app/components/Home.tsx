@@ -20,8 +20,7 @@
 import Link from 'next/link';
 import { User } from 'common';
 
-import { getTranslation } from '../i18n';
-import { ValidLanguage } from '../i18n/settings';
+import { ValidLanguage, getTranslation } from '@/i18n';
 
 const user: User = {
   id: '1',

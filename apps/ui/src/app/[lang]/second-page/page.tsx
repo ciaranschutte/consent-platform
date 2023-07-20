@@ -19,7 +19,7 @@
 
 import Header from '@/app/components/Header';
 import Second from './Second';
-import { ValidLanguage } from '@/app/i18n/settings';
+import { ValidLanguage } from '@/i18n/settings';
 
 export default async function Page({
   params: { lang },
