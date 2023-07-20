@@ -17,36 +17,10 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { getTranslation } from '../i18n';
-import LanguageToggle from './LanguageToggle';
-import { ValidLanguage, supportedLanguages } from '../i18n/settings';
+import styles from './Container.module.scss';
 
-export const getUnselectedLang = (lang: ValidLanguage): string => {
-  return supportedLanguages.filter((l) => l !== lang)[0];
+const Container = ({ children }: { children: React.ReactNode }) => {
+  return <div className={styles.container}>{children}</div>;
 };
 
-const Header = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'header');
-  const langToSelect = getUnselectedLang(lang);
-
-  return (
-    <header
-      style={{
-        margin: '20px 50px 20px 20px',
-        height: '50px',
-        display: 'flex',
-        flex: 1,
-        justifyContent: 'flex-end',
-      }}
-    >
-      <LanguageToggle
-        displayLangToSelect={translate(langToSelect)}
-        selected={lang}
-      >
-        {translate(lang)}
-      </LanguageToggle>
-    </header>
-  );
-};
-
-export default Header;
+export default Container;
