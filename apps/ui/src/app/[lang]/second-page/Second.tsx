@@ -19,8 +19,7 @@
 
 import Link from 'next/link';
 
-import { getTranslation } from '@/i18n';
-import { ValidLanguage } from '@/i18n/settings';
+import { getTranslation, ValidLanguage } from '@/i18n';
 
 const Second = async ({ lang }: { lang: ValidLanguage }) => {
   const translate = await getTranslation(lang, 'second-page');
