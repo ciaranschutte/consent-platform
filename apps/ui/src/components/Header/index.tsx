@@ -16,23 +16,35 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+import Image, { StaticImageData } from 'next/image';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
+import { defaultLanguage, supportedLanguages } from '@/i18n/settings';
 
 import LanguageToggle from '@/components/LanguageToggle';
 import styles from './Header.module.scss';
+import ohcrnImg from '@/public/ohcrn_large.svg';
 
 export const getUnselectedLang = (lang: ValidLanguage): string => {
   return supportedLanguages.filter((l) => l !== lang)[0];
+};
+
+const icons: { [k in ValidLanguage]: StaticImageData } = {
+  en: ohcrnImg,
+  fr: ohcrnImg, // TODO: get FR icon
 };
 
 const Header = async ({ lang }: { lang: ValidLanguage }) => {
   const translate = await getTranslation(lang, 'header');
   const langToSelect = getUnselectedLang(lang);
 
+  const displayIcon = icons[lang || defaultLanguage];
   return (
     <header className={styles.header}>
+      {/* TODO: getting an aspect ratio warning but adding width and/or height does not fix it -- needs investigation
+      "Image has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio." */}
+      <Image src={displayIcon} priority alt={translate('logo-alt-text')} />
+
       <LanguageToggle
         displayLangToSelect={translate(langToSelect)}
         selected={lang}

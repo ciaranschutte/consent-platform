@@ -2,8 +2,6 @@
     height: 80px;
     background-color: theme('colors.grayscale.100');
     padding: 0.5rem;
-}
-
-.logo {
-
+    display: flex;
+    justify-content: space-between;
 }
