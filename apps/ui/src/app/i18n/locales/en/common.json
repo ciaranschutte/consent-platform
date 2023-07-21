@@ -2,5 +2,7 @@
     "title": "OHCRN Patient Enrolment Portal",
     "greeting": "Hi there!",
     "to-second-page": "To second page",
-    "sample-text": "Sample text for the landing page."
+    "sample-text": "Sample text for the landing page.",
+    "page-title": "OHCRN - Home page",
+    "page-description": "Home page for OHCRN Patient Enrolment Portal"
 }

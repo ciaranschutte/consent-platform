@@ -19,8 +19,10 @@
 
 import Link from 'next/link';
 import { User } from 'common';
+import { ValidLanguage } from '@/app/i18n/settings';
+import { getTranslation } from '@/app/i18n';
 
-import { getTranslation, ValidLanguage } from '@/i18n';
+// import { getTranslation, ValidLanguage } from
 
 const user: User = {
   id: '1',

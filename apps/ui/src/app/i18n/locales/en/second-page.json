@@ -1,4 +1,6 @@
 {
     "title": "Hi from second page!",
-    "back-to-home": "Back to home"
+    "back-to-home": "Back to home",
+    "page-title": "OHCRN - Second page",
+    "page-description": "Second page for OHCRN Patient Enrolment Portal"
   }

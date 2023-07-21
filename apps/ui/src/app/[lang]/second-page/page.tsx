@@ -17,19 +17,31 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Header from '@/app/components/Header';
+import Header from '@/components/Header';
 import Second from './Second';
 import { ValidLanguage } from '@/app/i18n/settings';
+import { Metadata } from 'next';
+import { getTranslation } from '@/app/i18n';
+
+export async function generateMetadata({
+  params: { lang },
+}: {
+  params: { lang: ValidLanguage };
+}): Promise<Metadata> {
+  const translate = await getTranslation(lang, 'second-page');
+  return {
+    title: {
+      template: translate('page-title'),
+      default: translate('page-title'),
+    },
+    description: translate('page-description'),
+  };
+}
 
 export default async function Page({
   params: { lang },
 }: {
   params: { lang: ValidLanguage };
 }) {
-  return (
-    <>
-      <Header lang={lang} />
-      <Second lang={lang} />;
-    </>
-  );
+  return <Second lang={lang} />;
 }

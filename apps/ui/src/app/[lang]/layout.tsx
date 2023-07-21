@@ -20,18 +20,17 @@
 import { ValidLanguage, supportedLanguages } from '../i18n/settings';
 import '../globals.css';
 import { Montserrat } from 'next/font/google';
+import PageLayout from '../../components/PageLayout';
 
-const inter = Montserrat({ subsets: ['latin'] });
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+});
 
 export async function generateStaticParams() {
   return supportedLanguages.map((lang) => ({ lang }));
 }
-
-// TODO: translate metadata
-export const metadata = {
-  title: 'OHCRN - Homepage',
-  description: 'Landing page for OHCRN Patient Enrolment Portal',
-};
 
 export default async function RootLayout({
   children,
@@ -41,10 +40,9 @@ export default async function RootLayout({
   params: { lang: ValidLanguage };
 }) {
   return (
-    <html lang={lang}>
-      <head />
-      <body className={inter.className} style={{ flex: 1 }}>
-        {children}
+    <html lang={lang} className={`${montserrat.variable}`}>
+      <body>
+        <PageLayout lang={lang}>{children}</PageLayout>
       </body>
     </html>
   );

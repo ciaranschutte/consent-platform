@@ -25,10 +25,10 @@ import { ValidLanguage } from '@/app/i18n/settings';
 const Second = async ({ lang }: { lang: ValidLanguage }) => {
   const translate = await getTranslation(lang, 'second-page');
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div>
       <h1>{translate('title')}</h1>
       <Link href={`/${lang}`}>{translate('back-to-home')}</Link>
-    </main>
+    </div>
   );
 };
 
