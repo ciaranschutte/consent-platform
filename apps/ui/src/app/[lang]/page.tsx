@@ -19,17 +19,11 @@
 
 import { ValidLanguage } from '@/i18n';
 import HomeComponent from '@/components/Home';
-import Header from '@/components/Header';
 
 export default async function Home({
   params: { lang },
 }: {
   params: { lang: ValidLanguage };
 }) {
-  return (
-    <>
-      <Header lang={lang} />
-      <HomeComponent lang={lang} />
-    </>
-  );
+  return <HomeComponent lang={lang} />;
 }

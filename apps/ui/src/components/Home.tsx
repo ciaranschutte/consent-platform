@@ -31,12 +31,12 @@ const user: User = {
 const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
   const translate = await getTranslation(lang);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div>
       <h1>{translate('title')}</h1>
       <p>{translate('sample-text')}</p>
       <h2>{translate('greeting', { name: user.name })}</h2>
       <Link href={`/${lang}/second-page`}>{translate('to-second-page')}</Link>
-    </main>
+    </div>
   );
 };
 

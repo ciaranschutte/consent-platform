@@ -17,37 +17,10 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage, getTranslation } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
+import styles from './Footer.module.scss';
 
-import LanguageToggle from './LanguageToggle';
-
-export const getUnselectedLang = (lang: ValidLanguage): string => {
-  return supportedLanguages.filter((l) => l !== lang)[0];
+const Footer = () => {
+  return <footer className={styles.footer}>Footer content</footer>;
 };
 
-const Header = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'header');
-  const langToSelect = getUnselectedLang(lang);
-
-  return (
-    <header
-      style={{
-        margin: '20px 50px 20px 20px',
-        height: '50px',
-        display: 'flex',
-        flex: 1,
-        justifyContent: 'flex-end',
-      }}
-    >
-      <LanguageToggle
-        displayLangToSelect={translate(langToSelect)}
-        selected={lang}
-      >
-        {translate(lang)}
-      </LanguageToggle>
-    </header>
-  );
-};
-
-export default Header;
+export default Footer;
