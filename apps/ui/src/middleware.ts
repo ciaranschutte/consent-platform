@@ -24,11 +24,8 @@ import { defaultLanguage, supportedLanguages } from '@/i18n/settings';
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    '/((?!_next).*)',
-    // '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)',
-    // Optional: only run on root (/) URL
-    // '/',
-    // '/:lang*',
+    // '/((?!_next).*)',
+    '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)',
   ],
 };
 
