@@ -35,7 +35,7 @@ const PageLayout = async ({
       <Container>
         <Header lang={lang} />
         <main className={styles.main}>{children}</main>
-        <Footer />
+        <Footer lang={lang} />
       </Container>
     </>
   );

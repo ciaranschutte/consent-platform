@@ -19,7 +19,12 @@
 
 import { ValidLanguage } from './languages';
 
-export const namespaces = ['common', 'header', 'second-page'] as const;
+export const namespaces = [
+  'common',
+  'header',
+  'second-page',
+  'footer',
+] as const;
 export type ValidNamespace = (typeof namespaces)[number];
 
 export type GetDictionary = {
