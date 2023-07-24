@@ -1,7 +1,18 @@
 .header {
     height: 80px;
+    @media (max-width: theme('screens.sm'))  {
+        height: 55px;
+    }
     background-color: theme('colors.grayscale.100');
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;
+}
+
+.logo {
+    width: auto;
+    @media (max-width: theme('screens.sm'))  {
+        height: 30px;
+        width: 126px;
+    }
 }
