@@ -27,6 +27,11 @@ export const namespaces = [
 ] as const;
 export type ValidNamespace = (typeof namespaces)[number];
 
+export type Translation = (
+  k: string,
+  params?: { [key: string]: string | number }
+) => string;
+
 export type GetDictionary = {
   [k in ValidLanguage]: (
     namespace: ValidNamespace
@@ -36,6 +41,4 @@ export type GetDictionary = {
 export type GetTranslation = (
   language?: ValidLanguage,
   namespace?: ValidNamespace
-) => Promise<
-  (k: string, params?: { [key: string]: string | number }) => string
->;
+) => Promise<Translation>;

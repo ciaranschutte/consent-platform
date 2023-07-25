@@ -11,7 +11,7 @@
     "privacy": "Privacy Policy",
     "terms": "Terms & Conditions",
     "copyright": "Ontario Hereditary Cancer Research Network. All rights reserved.",
-    "ohcrn-registry": "OHCRN Registry",
+    "ohcrn-registry": "OHCRN Registry {{ registryVersion }}",
     "powered-by": "Powered by",
-    "api": "API"
+    "api": "API {{ apiVersion }}"
 }

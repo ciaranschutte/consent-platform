@@ -20,6 +20,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
+import { Translation } from '@/i18n/types';
 
 import styles from './Footer.module.scss';
 
@@ -55,75 +56,100 @@ const footerLinks: { translation: string; url: string }[] = [
   },
 ];
 
+const Versions = async ({ lang }: { lang: ValidLanguage }) => {
+  const translate = await getTranslation(lang, 'footer');
+  return (
+    <div className={styles.versions}>
+      <div className={styles.credit}>
+        <span>
+          <b>{translate('powered-by')}: </b>
+        </span>
+        <Link
+          href="#"
+          className={mergeClassnames(styles.icon, styles.overture)}
+        >
+          <Image src={OvertureLogo} alt={translate('overture-alt')} />
+        </Link>
+        <Link href="#" className={styles.icon}>
+          <Image src={GithubLogo} alt={translate('github-alt')} />
+        </Link>
+      </div>
+      <div className={styles.copyright}>
+        <span>{translate('copyright')} </span>
+        <span>
+          {translate('ohcrn-registry', { registryVersion: '0.1.0' })} -{' '}
+        </span>
+        <span>{translate('api', { apiVersion: '0.1.0' })}</span>
+      </div>
+    </div>
+  );
+};
+
+const Links = ({ translate }: { translate: Translation }) => {
+  return (
+    <div className={mergeClassnames(styles.linkGrid, styles.links)}>
+      {footerLinks.map((link) => (
+        <Link className={styles.link} key={link.translation} href={link.url}>
+          {translate(link.translation)}
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+const Right = ({ translate }: { translate: Translation }) => {
+  return (
+    <div className={styles.right}>
+      <Link href="#">
+        <Image
+          src={ONGovtLogo}
+          alt={translate('on-govt-logo-alt')}
+          className={styles['on-gov']}
+        />
+      </Link>
+    </div>
+  );
+};
+
+const Left = ({ translate }: { translate: Translation }) => {
+  return (
+    <div className={styles.left}>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={OICRLogo}
+          alt={translate('oicr-logo-alt')}
+          className={styles.oicr}
+        />
+      </Link>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={InstagramLogo}
+          alt={translate('instagram-logo-alt')}
+          className={styles.instagram}
+        />
+      </Link>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={TwitterLogo}
+          alt={translate('twitter-logo-alt')}
+          className={styles.twitter}
+        />
+      </Link>
+    </div>
+  );
+};
+
 const Footer = async ({ lang }: { lang: ValidLanguage }) => {
   const translate = await getTranslation(lang, 'footer');
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.content}>
-        <Link href="#" className={styles.icon}>
-          <Image
-            src={OICRLogo}
-            alt={translate('oicr-logo-alt')}
-            className={styles.oicr}
-          />
-        </Link>
-        <Link href="#" className={styles.icon}>
-          <Image
-            src={InstagramLogo}
-            alt={translate('instagram-logo-alt')}
-            className={styles.instagram}
-          />
-        </Link>
-        <Link href="#" className={styles.icon}>
-          <Image
-            src={TwitterLogo}
-            alt={translate('twitter-logo-alt')}
-            className={styles.twitter}
-          />
-        </Link>
+      <div className={styles.top}>
+        <Left translate={translate} />
+        <Right translate={translate} />
+        <Links translate={translate} />
       </div>
-      <div className={mergeClassnames(styles.content, styles.center)}>
-        <div>
-          {footerLinks.map((link) => (
-            <Link
-              className={styles.link}
-              key={link.translation}
-              href={link.url}
-            >
-              {translate(link.translation)}
-            </Link>
-          ))}
-        </div>
-        <div>
-          <span>{translate('copyright')} </span>
-          <span>{translate('ohcrn-registry')} - </span>
-          <span>{translate('api')} - </span>
-        </div>
-        <div className={styles.content}>
-          <span>
-            <b>{translate('powered-by')}: </b>
-          </span>
-          <Link
-            href="#"
-            className={mergeClassnames(styles.icon, styles.overture)}
-          >
-            <Image src={OvertureLogo} alt={translate('overture-alt')} />
-          </Link>
-          <Link href="#" className={styles.icon}>
-            <Image src={GithubLogo} alt={translate('github-alt')} />
-          </Link>
-        </div>
-      </div>
-      <div className={styles.content}>
-        <Link href="#">
-          <Image
-            src={ONGovtLogo}
-            alt={translate('on-govt-logo-alt')}
-            className={styles['on-gov']}
-          />
-        </Link>
-      </div>
+      <Versions lang={lang} />
     </footer>
   );
 };
