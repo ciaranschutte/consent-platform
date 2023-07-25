@@ -31,13 +31,11 @@ const PageLayout = async ({
   lang: ValidLanguage;
 }) => {
   return (
-    <>
       <Container>
         <Header lang={lang} />
         <main className={styles.main}>{children}</main>
         <Footer lang={lang} />
       </Container>
-    </>
   );
 };
 
