@@ -17,28 +17,46 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage, getTranslation } from '@/i18n';
+import Link from 'next/link';
+import clsx from 'clsx';
+
+import { Translation } from '@/i18n';
 
 import styles from './Footer.module.scss';
 
-import Versions from './Versions';
-import Links from './Links';
-import Right from './Right';
-import Left from './Left';
+const footerLinks: { translation: string; url: string }[] = [
+  {
+    translation: 'about',
+    url: '#',
+  },
+  {
+    translation: 'help',
+    url: '#',
+  },
+  {
+    translation: 'contact',
+    url: '#',
+  },
+  {
+    translation: 'terms',
+    url: '#',
+  },
+  {
+    translation: 'privacy',
+    url: '#',
+  },
+];
 
-const Footer = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'footer');
-
+const Links = ({ translate }: { translate: Translation }) => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.top}>
-        <Left translate={translate} />
-        <Right translate={translate} />
-        <Links translate={translate} />
-      </div>
-      <Versions lang={lang} />
-    </footer>
+    <div className={clsx(styles.linkGrid, styles.links)}>
+      {footerLinks.map((link) => (
+        <Link className={styles.link} key={link.translation} href={link.url}>
+          {translate(link.translation)}
+        </Link>
+      ))}
+    </div>
   );
 };
 
-export default Footer;
+export default Links;

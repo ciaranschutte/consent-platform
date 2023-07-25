@@ -17,28 +17,43 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage, getTranslation } from '@/i18n';
+import Link from 'next/link';
+import Image from 'next/image';
+
+import { Translation } from '@/i18n';
 
 import styles from './Footer.module.scss';
 
-import Versions from './Versions';
-import Links from './Links';
-import Right from './Right';
-import Left from './Left';
+import OICRLogo from '@/public/oicr.svg';
+import InstagramLogo from '@/public/instagram.svg';
+import TwitterLogo from '@/public/twitter.svg';
 
-const Footer = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'footer');
-
+const Left = ({ translate }: { translate: Translation }) => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.top}>
-        <Left translate={translate} />
-        <Right translate={translate} />
-        <Links translate={translate} />
-      </div>
-      <Versions lang={lang} />
-    </footer>
+    <div className={styles.left}>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={OICRLogo}
+          alt={translate('oicr-logo-alt')}
+          className={styles.oicr}
+        />
+      </Link>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={InstagramLogo}
+          alt={translate('instagram-logo-alt')}
+          className={styles.instagram}
+        />
+      </Link>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={TwitterLogo}
+          alt={translate('twitter-logo-alt')}
+          className={styles.twitter}
+        />
+      </Link>
+    </div>
   );
 };
 
-export default Footer;
+export default Left;

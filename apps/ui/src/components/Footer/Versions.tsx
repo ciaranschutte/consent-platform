@@ -17,28 +17,43 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import Link from 'next/link';
+import Image from 'next/image';
+import clsx from 'clsx';
+
+import GithubLogo from '@/public/github.svg';
+import OvertureLogo from '@/public/overture.svg';
+
 import { ValidLanguage, getTranslation } from '@/i18n';
 
 import styles from './Footer.module.scss';
 
-import Versions from './Versions';
-import Links from './Links';
-import Right from './Right';
-import Left from './Left';
-
-const Footer = async ({ lang }: { lang: ValidLanguage }) => {
+const Versions = async ({ lang }: { lang: ValidLanguage }) => {
   const translate = await getTranslation(lang, 'footer');
-
   return (
-    <footer className={styles.footer}>
-      <div className={styles.top}>
-        <Left translate={translate} />
-        <Right translate={translate} />
-        <Links translate={translate} />
+    <div className={styles.versions}>
+      <div className={styles.credit}>
+        <span>
+          <b>{translate('powered-by')}: </b>
+        </span>
+        <Link href="#" className={clsx(styles.icon, styles.overture)}>
+          <Image src={OvertureLogo} alt={translate('overture-alt')} />
+        </Link>
+        <Link href="#" className={styles.icon}>
+          <Image src={GithubLogo} alt={translate('github-alt')} />
+        </Link>
       </div>
-      <Versions lang={lang} />
-    </footer>
+      <div className={styles.copyright}>
+        <span>{translate('copyright')} </span>
+        <span>
+          {/* TODO: fix hardcoded version */}
+          {translate('ohcrn-registry', { registryVersion: '0.1.0' })} -{' '}
+        </span>
+        {/* TODO: fix hardcoded version */}
+        <span>{translate('api', { apiVersion: '0.1.0' })}</span>
+      </div>
+    </div>
   );
 };
 
-export default Footer;
+export default Versions;

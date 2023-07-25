@@ -17,28 +17,27 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage, getTranslation } from '@/i18n';
+import Link from 'next/link';
+import Image from 'next/image';
+
+import { Translation } from '@/i18n';
 
 import styles from './Footer.module.scss';
 
-import Versions from './Versions';
-import Links from './Links';
-import Right from './Right';
-import Left from './Left';
+import ONGovtLogo from '@/public/on_govt.svg';
 
-const Footer = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'footer');
-
+const Right = ({ translate }: { translate: Translation }) => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.top}>
-        <Left translate={translate} />
-        <Right translate={translate} />
-        <Links translate={translate} />
-      </div>
-      <Versions lang={lang} />
-    </footer>
+    <div className={styles.right}>
+      <Link href="#">
+        <Image
+          src={ONGovtLogo}
+          alt={translate('on-govt-logo-alt')}
+          className={styles['on-gov']}
+        />
+      </Link>
+    </div>
   );
 };
 
-export default Footer;
+export default Right;
