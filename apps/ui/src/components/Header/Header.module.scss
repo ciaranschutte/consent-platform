@@ -1,7 +1,7 @@
 .header {
-    height: 80px;
-    @media (max-width: theme('screens.sm'))  {
-        height: 55px;
+    height: 55px;
+    @media (min-width: theme('screens.md'))  {
+        height: 80px;
     }
     background-color: theme('colors.grayscale.100');
     padding: 0.5rem;
@@ -11,8 +11,10 @@
 
 .logo {
     width: auto;
-    @media (max-width: theme('screens.sm'))  {
-        height: 30px;
-        width: 126px;
+    height: 30px;
+    width: 126px;
+    @media (min-width: theme('screens.md'))  {
+        height: 61px;
+        width: 250px;
     }
 }

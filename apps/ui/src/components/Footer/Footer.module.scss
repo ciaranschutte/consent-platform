@@ -75,7 +75,7 @@
     justify-content: center;
     align-items: center;
     @media (min-width: theme('screens.lg')) {
-        margin-top: -55px;
+        margin-top: -40px;
     }
 }
 
@@ -102,14 +102,15 @@
 
 .icon {
     margin-right: 1rem;
-
 }
+
 .oicr {
     height: 83px;
     width: 114px;
     margin-bottom: 1rem;
     @media (min-width: theme('screens.md')) {
-        margin-right: 2rem;
+        margin-right: 1rem;
+        margin-bottom: 0;
     }
 }
 

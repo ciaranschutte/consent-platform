@@ -77,8 +77,10 @@ const Versions = async ({ lang }: { lang: ValidLanguage }) => {
       <div className={styles.copyright}>
         <span>{translate('copyright')} </span>
         <span>
+          {/* TODO: fix hardcoded version */}
           {translate('ohcrn-registry', { registryVersion: '0.1.0' })} -{' '}
         </span>
+        {/* TODO: fix hardcoded version */}
         <span>{translate('api', { apiVersion: '0.1.0' })}</span>
       </div>
     </div>
