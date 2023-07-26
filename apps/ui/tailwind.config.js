@@ -13,7 +13,6 @@ module.exports = {
     fontFamily: {
       sans: ['var(--font-montserrat)'],
     },
-    // TODO: add these as rem values, will get updated when style guide updated
     fontSize: {
       xs: ['0.81rem', { lineHeight: '1.25rem', fontWeight: '400' }], // 13px, 20px
       sm: ['0.875rem', { lineHeight: '1.5rem', fontWeight: '400' }], // 14px, 24px
