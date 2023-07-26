@@ -13,26 +13,27 @@ body {
 }
 
 h1 {
-  font-size: theme('fontSize.2xl');
+  font-size: theme('fontSize.3xl');
 }
 
 h2 {
-  font-size: theme('fontSize.xl');
+  font-size: theme('fontSize.2xl');
 }
 
 h3 {
-  font-size: theme('fontSize.lg');
+  font-size: theme('fontSize.xl');
 }
 
 h4 {
   font-size: theme('fontSize.base');
+  line-height: 1.75rem;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 700;
+  font-weight: theme('fontWeight.header');
 }
 
 b {
