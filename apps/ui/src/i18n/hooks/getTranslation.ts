@@ -17,8 +17,8 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { GetDictionary, GetTranslation } from '../types';
-import { defaultLanguage, defaultNamespace } from '../settings';
+import { GetDictionary, GetTranslation } from '@/i18n/types';
+import { defaultLanguage, defaultNamespace } from '@/i18n/settings';
 
 // these will only reload on page refresh (server only) or lang change
 const dictionaries: GetDictionary = {

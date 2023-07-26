@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+import colors from './src/theme/colors';
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -6,13 +9,24 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+    colors,
+    fontFamily: {
+      sans: ['var(--font-montserrat)'],
     },
+    // TODO: add these as rem values, will get updated when style guide updated
+    fontSize: {
+      xs: ['13px', { lineHeight: '15.85px', fontWeight: '400' }],
+      sm: ['14px', { lineHeight: '16px', fontWeight: '400' }],
+      base: ['16px', { lineHeight: '19.5px', fontWeight: '400' }],
+      lg: ['18px', { lineHeight: '22px', fontWeight: '400' }],
+      xl: ['24px', { lineHeight: '29px', fontWeight: '400' }],
+      '2xl': ['46px', { lineHeight: '56px', fontWeight: '400' }],
+    },
+    fontWeight: {
+      normal: '400',
+      bold: '600',
+    },
+    extend: {},
   },
   plugins: [],
-}
+};

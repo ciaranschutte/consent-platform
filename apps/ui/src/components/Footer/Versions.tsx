@@ -18,17 +18,42 @@
  */
 
 import Link from 'next/link';
+import Image from 'next/image';
+import clsx from 'clsx';
 
-import { getTranslation, ValidLanguage } from '@/i18n';
+import GithubLogo from '@/public/github.svg';
+import OvertureLogo from '@/public/overture.svg';
 
-const Second = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'second-page');
+import { ValidLanguage, getTranslation } from '@/i18n';
+
+import styles from './Footer.module.scss';
+
+const Versions = async ({ lang }: { lang: ValidLanguage }) => {
+  const translate = await getTranslation(lang, 'footer');
   return (
-    <div>
-      <h1>{translate('title')}</h1>
-      <Link href={`/${lang}`}>{translate('back-to-home')}</Link>
+    <div className={styles.versions}>
+      <div className={styles.credit}>
+        <span>
+          <b>{translate('powered-by')}: </b>
+        </span>
+        <Link href="#" className={clsx(styles.icon, styles.overture)}>
+          <Image src={OvertureLogo} alt={translate('overture-alt')} />
+        </Link>
+        <Link href="#" className={styles.icon}>
+          <Image src={GithubLogo} alt={translate('github-alt')} />
+        </Link>
+      </div>
+      <div className={styles.copyright}>
+        <span>{translate('copyright')} </span>
+        <span>
+          {/* TODO: fix hardcoded version */}
+          {translate('ohcrn-registry', { registryVersion: '0.1.0' })} -{' '}
+        </span>
+        {/* TODO: fix hardcoded version */}
+        <span>{translate('api', { apiVersion: '0.1.0' })}</span>
+      </div>
     </div>
   );
 };
 
-export default Second;
+export default Versions;

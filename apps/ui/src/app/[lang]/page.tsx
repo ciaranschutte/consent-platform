@@ -17,19 +17,13 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Header from '../components/Header';
 import { ValidLanguage } from '@/i18n';
-import HomeComponent from '../components/Home';
+import HomeComponent from '@/components/Home';
 
 export default async function Home({
   params: { lang },
 }: {
   params: { lang: ValidLanguage };
 }) {
-  return (
-    <>
-      <Header lang={lang} />
-      <HomeComponent lang={lang} />
-    </>
-  );
+  return <HomeComponent lang={lang} />;
 }

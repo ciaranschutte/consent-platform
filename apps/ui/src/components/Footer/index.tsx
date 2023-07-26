@@ -17,27 +17,28 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Link from 'next/link';
-import { User } from 'common';
-
 import { ValidLanguage, getTranslation } from '@/i18n';
 
-const user: User = {
-  id: '1',
-  name: 'Homer Simpson',
-  email: 'homersimpson@example.com',
-};
+import styles from './Footer.module.scss';
 
-const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang);
+import Versions from './Versions';
+import Links from './Links';
+import Right from './Right';
+import Left from './Left';
+
+const Footer = async ({ lang }: { lang: ValidLanguage }) => {
+  const translate = await getTranslation(lang, 'footer');
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>{translate('title')}</h1>
-      <p>{translate('sample-text')}</p>
-      <h2>{translate('greeting', { name: user.name })}</h2>
-      <Link href={`/${lang}/second-page`}>{translate('to-second-page')}</Link>
-    </main>
+    <footer className={styles.footer}>
+      <div className={styles.top}>
+        <Left translate={translate} />
+        <Right translate={translate} />
+        <Links translate={translate} />
+      </div>
+      <Versions lang={lang} />
+    </footer>
   );
 };
 
-export default HomeComponent;
+export default Footer;

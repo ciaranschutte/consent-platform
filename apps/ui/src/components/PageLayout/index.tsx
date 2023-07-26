@@ -16,42 +16,27 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import { Montserrat } from 'next/font/google';
-
-import '../globals.css';
 
 import { ValidLanguage } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
-import PageLayout from '@/components/PageLayout';
+import Container from '@/components/Container';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import styles from './PageLayout.module.scss';
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-montserrat',
-});
-
-export async function generateStaticParams() {
-  return supportedLanguages.map((lang) => ({ lang }));
-}
-
-// TODO: translate metadata
-export const metadata = {
-  title: 'OHCRN - Homepage',
-  description: 'Landing page for OHCRN Patient Enrolment Portal',
-};
-
-export default async function RootLayout({
+const PageLayout = async ({
   children,
-  params: { lang },
+  lang,
 }: {
   children: React.ReactNode;
-  params: { lang: ValidLanguage };
-}) {
+  lang: ValidLanguage;
+}) => {
   return (
-    <html lang={lang}>
-      <body className={`${montserrat.className}`}>
-        <PageLayout lang={lang}>{children}</PageLayout>
-      </body>
-    </html>
+      <Container>
+        <Header lang={lang} />
+        <main className={styles.main}>{children}</main>
+        <Footer lang={lang} />
+      </Container>
   );
-}
+};
+
+export default PageLayout;

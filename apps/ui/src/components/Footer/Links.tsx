@@ -16,42 +16,47 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import { Montserrat } from 'next/font/google';
 
-import '../globals.css';
+import Link from 'next/link';
+import clsx from 'clsx';
 
-import { ValidLanguage } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
-import PageLayout from '@/components/PageLayout';
+import { Translation } from '@/i18n';
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-montserrat',
-});
+import styles from './Footer.module.scss';
 
-export async function generateStaticParams() {
-  return supportedLanguages.map((lang) => ({ lang }));
-}
+const footerLinks: { translation: string; url: string }[] = [
+  {
+    translation: 'about',
+    url: '#',
+  },
+  {
+    translation: 'help',
+    url: '#',
+  },
+  {
+    translation: 'contact',
+    url: '#',
+  },
+  {
+    translation: 'terms',
+    url: '#',
+  },
+  {
+    translation: 'privacy',
+    url: '#',
+  },
+];
 
-// TODO: translate metadata
-export const metadata = {
-  title: 'OHCRN - Homepage',
-  description: 'Landing page for OHCRN Patient Enrolment Portal',
+const Links = ({ translate }: { translate: Translation }) => {
+  return (
+    <div className={clsx(styles.linkGrid, styles.links)}>
+      {footerLinks.map((link) => (
+        <Link className={styles.link} key={link.translation} href={link.url}>
+          {translate(link.translation)}
+        </Link>
+      ))}
+    </div>
+  );
 };
 
-export default async function RootLayout({
-  children,
-  params: { lang },
-}: {
-  children: React.ReactNode;
-  params: { lang: ValidLanguage };
-}) {
-  return (
-    <html lang={lang}>
-      <body className={`${montserrat.className}`}>
-        <PageLayout lang={lang}>{children}</PageLayout>
-      </body>
-    </html>
-  );
-}
+export default Links;

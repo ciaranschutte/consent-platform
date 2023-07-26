@@ -17,37 +17,43 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage, getTranslation } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import LanguageToggle from './LanguageToggle';
+import { Translation } from '@/i18n';
 
-export const getUnselectedLang = (lang: ValidLanguage): string => {
-  return supportedLanguages.filter((l) => l !== lang)[0];
-};
+import styles from './Footer.module.scss';
 
-const Header = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'header');
-  const langToSelect = getUnselectedLang(lang);
+import OICRLogo from '@/public/oicr.svg';
+import InstagramLogo from '@/public/instagram.svg';
+import TwitterLogo from '@/public/twitter.svg';
 
+const Left = ({ translate }: { translate: Translation }) => {
   return (
-    <header
-      style={{
-        margin: '20px 50px 20px 20px',
-        height: '50px',
-        display: 'flex',
-        flex: 1,
-        justifyContent: 'flex-end',
-      }}
-    >
-      <LanguageToggle
-        displayLangToSelect={translate(langToSelect)}
-        selected={lang}
-      >
-        {translate(lang)}
-      </LanguageToggle>
-    </header>
+    <div className={styles.left}>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={OICRLogo}
+          alt={translate('oicr-logo-alt')}
+          className={styles.oicr}
+        />
+      </Link>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={InstagramLogo}
+          alt={translate('instagram-logo-alt')}
+          className={styles.instagram}
+        />
+      </Link>
+      <Link href="#" className={styles.icon}>
+        <Image
+          src={TwitterLogo}
+          alt={translate('twitter-logo-alt')}
+          className={styles.twitter}
+        />
+      </Link>
+    </div>
   );
 };
 
-export default Header;
+export default Left;

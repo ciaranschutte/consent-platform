@@ -16,42 +16,28 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import { Montserrat } from 'next/font/google';
 
-import '../globals.css';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { ValidLanguage } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
-import PageLayout from '@/components/PageLayout';
+import { Translation } from '@/i18n';
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-montserrat',
-});
+import styles from './Footer.module.scss';
 
-export async function generateStaticParams() {
-  return supportedLanguages.map((lang) => ({ lang }));
-}
+import ONGovtLogo from '@/public/on_govt.svg';
 
-// TODO: translate metadata
-export const metadata = {
-  title: 'OHCRN - Homepage',
-  description: 'Landing page for OHCRN Patient Enrolment Portal',
+const Right = ({ translate }: { translate: Translation }) => {
+  return (
+    <div className={styles.right}>
+      <Link href="#">
+        <Image
+          src={ONGovtLogo}
+          alt={translate('on-govt-logo-alt')}
+          className={styles['on-gov']}
+        />
+      </Link>
+    </div>
+  );
 };
 
-export default async function RootLayout({
-  children,
-  params: { lang },
-}: {
-  children: React.ReactNode;
-  params: { lang: ValidLanguage };
-}) {
-  return (
-    <html lang={lang}>
-      <body className={`${montserrat.className}`}>
-        <PageLayout lang={lang}>{children}</PageLayout>
-      </body>
-    </html>
-  );
-}
+export default Right;
