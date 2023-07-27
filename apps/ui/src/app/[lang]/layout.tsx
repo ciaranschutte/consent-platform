@@ -24,10 +24,9 @@ import { ValidLanguage } from '@/i18n';
 import { supportedLanguages } from '@/i18n/settings';
 import PageLayout from '@/components/PageLayout';
 
-const montserrat = Montserrat({
+export const montserrat = Montserrat({
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-montserrat',
+  variable: '--font-sans',
 });
 
 export async function generateStaticParams() {

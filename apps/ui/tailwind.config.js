@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     colors,
     fontFamily: {
-      sans: ['var(--font-montserrat)'],
+      sans: ['Montserrat', 'Lato', 'Arial', 'sans-serif'],
     },
     fontSize: {
       xs: ['0.81rem', { lineHeight: '1.25rem', fontWeight: '400' }], // 13px, 20px
