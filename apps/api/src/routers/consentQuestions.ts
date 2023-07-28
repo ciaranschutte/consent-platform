@@ -20,10 +20,11 @@
 import { Router } from 'express';
 
 import {
-  getConsentQuestion,
-  getConsentQuestions,
-  getLatestParticipantResponseByParticipantIdAndQuestionId,
+	getConsentQuestion,
+	getConsentQuestions,
+	// getLatestParticipantResponseByParticipantIdAndQuestionId,
 } from '../service/search';
+
 const router = Router();
 
 /**
@@ -59,9 +60,9 @@ const router = Router();
  *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
  */
 router.get('/', async (req, res) => {
-  const searchParams = req.query;
-  const consentQuestions = await getConsentQuestions(searchParams);
-  res.status(200).send(consentQuestions);
+	const searchParams = req.query;
+	const consentQuestions = await getConsentQuestions(searchParams);
+	res.status(200).send(consentQuestions);
 });
 
 /**
@@ -90,13 +91,13 @@ router.get('/', async (req, res) => {
  *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
  */
 router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const consentQuestion = await getConsentQuestion(id);
-    return res.status(200).send({ consentQuestion });
-  } catch (error) {
-    res.status(404).send('Consent Question not found');
-  }
+	const { id } = req.params;
+	try {
+		const consentQuestion = await getConsentQuestion(id);
+		return res.status(200).send({ consentQuestion });
+	} catch (error) {
+		res.status(404).send('Consent Question not found');
+	}
 });
 
 export default router;

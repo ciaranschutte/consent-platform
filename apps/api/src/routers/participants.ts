@@ -20,9 +20,9 @@
 import { Router } from 'express';
 
 import {
-  getLatestParticipantResponseByParticipantIdAndQuestionId,
-  getParticipant,
-  getParticipants,
+	getLatestParticipantResponseByParticipantIdAndQuestionId,
+	getParticipant,
+	getParticipants,
 } from '../service/search';
 
 /**
@@ -53,8 +53,8 @@ const router = Router();
  *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
  */
 router.get('/', async (req, res) => {
-  const participants = await getParticipants();
-  res.send({ participants: [participants] });
+	const participants = await getParticipants();
+	res.send({ participants: [participants] });
 });
 
 /**
@@ -83,14 +83,14 @@ router.get('/', async (req, res) => {
  *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
  */
 router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const participant = await getParticipant(id);
-    res.status(200).send({ participant });
-  } catch (error) {
-    console.log(error);
-    res.status(404).send({ error: 'Participant not found' });
-  }
+	const { id } = req.params;
+	try {
+		const participant = await getParticipant(id);
+		res.status(200).send({ participant });
+	} catch (error) {
+		console.log(error);
+		res.status(404).send({ error: 'Participant not found' });
+	}
 });
 
 /**
@@ -125,14 +125,13 @@ router.get('/:id', async (req, res) => {
  *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
  */
 router.get('/:id/consent-questions/:consentQuestionId', async (req, res) => {
-  const { id, consentQuestionId } = req.params;
-  const latestResponse =
-    await getLatestParticipantResponseByParticipantIdAndQuestionId(
-      id,
-      consentQuestionId
-    );
+	const { id, consentQuestionId } = req.params;
+	const latestResponse = await getLatestParticipantResponseByParticipantIdAndQuestionId(
+		id,
+		consentQuestionId,
+	);
 
-  res.status(200).send({ latestResponse });
+	res.status(200).send({ latestResponse });
 });
 
 export default router;

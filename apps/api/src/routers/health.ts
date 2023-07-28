@@ -43,8 +43,8 @@ const router = Router();
  *         description: Server error
  */
 router.get('/', async (req, res) => {
-  // TODO: add real health check
-  res.json({ message: `API is running.` });
+	// TODO: add real health check
+	res.json({ message: `API is running.` });
 });
 
 export default router;

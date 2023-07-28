@@ -63,13 +63,13 @@ const router = Router();
  *         description: Forbidden. Provided Authorization token is valid but has insufficient permissions to make this request.
  */
 router.post('/', async (req, res) => {
-  const { participantId, consentQuestionId, response } = req.body;
-  const result = await createResponse({
-    consentQuestionId,
-    participantId,
-    response,
-  });
-  res.status(201).send(result);
+	const { participantId, consentQuestionId, response } = req.body;
+	const result = await createResponse({
+		consentQuestionId,
+		participantId,
+		response,
+	});
+	res.status(201).send(result);
 });
 
 export default router;

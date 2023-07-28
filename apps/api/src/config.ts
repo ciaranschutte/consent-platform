@@ -1,12 +1,12 @@
 import * as dotenv from 'dotenv';
 
 export type AppConfig = {
-  port: string;
+	port: string;
 };
 
 export const getAppConfig = (): AppConfig => {
-  dotenv.config();
-  return {
-    port: process.env.PORT || '8080',
-  };
+	dotenv.config();
+	return {
+		port: process.env.PORT || '8080',
+	};
 };
