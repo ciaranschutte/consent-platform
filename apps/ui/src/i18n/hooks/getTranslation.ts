@@ -22,38 +22,38 @@ import { defaultLanguage, defaultNamespace } from '@/i18n/settings';
 
 // these will only reload on page refresh (server only) or lang change
 const dictionaries: GetDictionary = {
-  en: (namespace) =>
-    import(`../locales/en/${namespace}.json`).then((module) => {
-      return module.default;
-    }),
-  fr: (namespace) =>
-    import(`../locales/fr/${namespace}.json`).then((module) => {
-      return module.default;
-    }),
+	en: (namespace) =>
+		import(`../locales/en/${namespace}.json`).then((module) => {
+			return module.default;
+		}),
+	fr: (namespace) =>
+		import(`../locales/fr/${namespace}.json`).then((module) => {
+			return module.default;
+		}),
 };
 
 export const getTranslation: GetTranslation = async (
-  language = defaultLanguage,
-  namespace = defaultNamespace
+	language = defaultLanguage,
+	namespace = defaultNamespace,
 ) => {
-  const dictionary = await dictionaries[language](namespace);
-  return (key: string, params?: { [key: string]: string | number }) => {
-    let translation = dictionary[key];
-    // TODO: use this for nested keys, not sure if we will use this approach? namespaces may be sufficient
-    // .split('.')
-    // .reduce((obj, key) => obj && obj[key], dictionary);
+	const dictionary = await dictionaries[language](namespace);
+	return (key: string, params?: { [key: string]: string | number }) => {
+		let translation = dictionary[key];
+		// TODO: use this for nested keys, not sure if we will use this approach? namespaces may be sufficient
+		// .split('.')
+		// .reduce((obj, key) => obj && obj[key], dictionary);
 
-    if (!translation) {
-      // TODO: add error handling/default values for missing translations
-      console.error('Could not find translation');
-      return key;
-    }
-    // for interpolation
-    if (params && Object.entries(params).length) {
-      Object.entries(params).forEach(([key, value]) => {
-        translation = translation!.replace(`{{ ${key} }}`, String(value));
-      });
-    }
-    return translation;
-  };
+		if (!translation) {
+			// TODO: add error handling/default values for missing translations
+			console.error('Could not find translation');
+			return key;
+		}
+		// for interpolation
+		if (params && Object.entries(params).length) {
+			Object.entries(params).forEach(([key, value]) => {
+				translation = translation!.replace(`{{ ${key} }}`, String(value));
+			});
+		}
+		return translation;
+	};
 };
