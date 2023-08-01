@@ -27,6 +27,7 @@ import LanguageToggle from '@/components/LanguageToggle';
 import styles from './Header.module.scss';
 
 import OhcrnImage from '@/public/ohcrn_large.svg';
+import HelpButton from './HelpButton';
 
 export const getUnselectedLang = (lang: ValidLanguage): string => {
   return supportedLanguages.filter((l) => l !== lang)[0];
@@ -46,21 +47,30 @@ const Header = async ({ lang }: { lang: ValidLanguage }) => {
   const icon = icons[lang || defaultLanguage];
   return (
     <header className={styles.header}>
-      <Link href={`/${lang}`}>
-        <Image
-          src={icon}
-          priority
-          alt={translate('logo-alt-text')}
-          className={styles.logo}
-        />
-      </Link>
-
-      <LanguageToggle
-        displayLangToSelect={translate(langToSelect)}
-        selected={lang}
-      >
-        {translate(lang)}
-      </LanguageToggle>
+      <div>
+        <Link href={`/${lang}`}>
+          <Image
+            src={icon}
+            priority
+            alt={translate('logo-alt-text')}
+            className={styles.logo}
+          />
+        </Link>
+      </div>
+      <div className={styles.right}>
+        <div className={styles['hide-on-mobile']}>
+          <LanguageToggle
+            displayLangToSelect={translate(langToSelect)}
+            currentLang={{ lang, translated: translate(lang) }}
+          />
+        </div>
+        <div className={styles['hide-on-mobile']}>
+          <HelpButton />
+        </div>
+        <div className={styles['user-menu']}>
+          <div>Hello, User</div>
+        </div>
+      </div>
     </header>
   );
 };

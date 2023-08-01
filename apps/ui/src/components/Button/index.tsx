@@ -17,43 +17,42 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-'use client';
-import { usePathname } from 'next/navigation';
+import { ReactNode } from 'react';
+import styles from './Button.module.scss';
+import clsx from 'clsx';
 
-import { defaultLanguage } from '@/i18n/settings';
-import { ValidLanguage } from '@/i18n';
-import { getUnselectedLang } from '@/components/Header';
-import LinkButton from '@/components/Button/LinkButton';
-
-export const replaceLocaleInUrl = (
-  path: string,
-  currentLang: string = 'en'
-): string => {
-  const unselectedLang = getUnselectedLang(currentLang as ValidLanguage);
-  const splitPath = path.split('/');
-  if (!splitPath.length) {
-    return defaultLanguage;
-  }
-  const originalLangRemoved = splitPath.slice(2).filter((item) => item.length);
-  const joinedPath = [unselectedLang].concat(originalLangRemoved).join('/');
-  return joinedPath;
+export type ButtonVariant = 'primary' | 'secondary';
+export type ButtonColor = 'default' | 'blue' | 'green';
+export interface ButtonProps {
+  children: ReactNode;
+  onClick: (e: React.SyntheticEvent<HTMLElement>) => any;
+  variant?: ButtonVariant;
+  color?: ButtonColor;
+  disabled?: boolean;
+  className?: string;
+}
+const Button = ({
+  children,
+  onClick,
+  variant = 'primary',
+  color = 'default',
+  disabled = false,
+  className = '',
+}: ButtonProps) => {
+  return (
+    <button
+      className={clsx(
+        styles.base,
+        styles[variant],
+        styles[color],
+        disabled,
+        styles[className]
+      )}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
 };
 
-function LanguageToggle({
-  currentLang,
-  displayLangToSelect,
-}: {
-  currentLang: { lang: ValidLanguage; translated: string };
-  displayLangToSelect: string;
-}) {
-  const path = usePathname();
-  const newPath = replaceLocaleInUrl(path, currentLang.lang);
-
-  return (
-    <LinkButton href={newPath} color="blue" className="font-bold">
-      {displayLangToSelect}
-    </LinkButton>
-  );
-}
-
-export default LanguageToggle;
+export default Button;
