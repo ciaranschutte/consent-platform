@@ -1,4 +1,4 @@
-# OHCRN Consent Platform
+# OHCRN Platform
 
 [![TypeScript](https://img.shields.io/badge/types-%20TypeScript-blue)](https://www.typescriptlang.org/)
 
@@ -9,7 +9,11 @@
 | **Edge**   | [![Build Status](https://jenkins.qa.cancercollaboratory.org/buildStatus/icon?job=ARGO%2Fui%2Fdevelop)](https://jenkins.qa.cancercollaboratory.org/job/ARGO/job/ui/job/develop/) |
 | **Latest** | [![Build Status](https://jenkins.qa.cancercollaboratory.org/buildStatus/icon?job=ARGO%2Fui%2Fmaster)](https://jenkins.qa.cancercollaboratory.org/job/ARGO/job/ui/job/master/)   | -->
 
-This monorepo contains the UI, API, and shared TypeScript types for the OHCRN Consent Platform - a portal through which patients can self-register and clinicians can register their patients to consent to participate in the OHCRN study.
+This repo contains the codebase for the OHCRN Platform:
+
+- Consent Platform: portal through which participants can self-register and clinicians can register their patients to consent to participate in the OHCRN study
+- Coordinator Dashboard: administrative dashboard for managing Participant consent and inputting data from clinics
+- Data Portal: interface for interacting with the OHCRN data
 
 This project is a monorepo managed by [pnpm](https://pnpm.io/motivation)
 
@@ -17,16 +21,17 @@ The directory structure is as follows:
 
 ```
 .
-├── apps
-│   ├── api     <- Node.js Express API
-│   │   ├── prisma
-│   │   └── src
-│   └── ui      <- Next.js UI
-│       ├── public
-│       └── src
-└── packages
-    └── common  <- shared TypeScript type definitions
-        └── src
+├── apps/
+│   ├── consent-api/                ← Consent Platform Node.js Express API
+│   │   ├── prisma
+│   │   └── src
+│   └── consent-ui/                 ← Consent Platform Next.js UI
+│       └── src
+└── packages/
+    ├── common/                     ← Shared TypeScript Type Definitions
+    │   └── src
+    └── config/
+        └── eslint-config-ohcrn     ← Custom ESLint Config for OHCRN
 ```
 
 ### Writing Commits
@@ -47,8 +52,8 @@ To keep commit messages consistent, we use [gitmoji](https://gitmoji.dev). To ea
 
 To run the setup locally, ensure you have provided the **required** environment variables, as described in [Environment Variables](#environment-variables). Each package has an `.env.schema` file for reference.
 
-- In the [`/apps/api/` folder](./apps/api/), create an `.env` file
-- In the [`/apps/ui/` folder](./apps/ui/), create and `.env.local` file
+- In the [`/apps/consent-api/` folder](./apps/consent-api/), create an `.env` file
+- In the [`/apps/consent-ui/` folder](./apps/consent-ui/), create and `.env.local` file
 
 ## Environment Variables
 
