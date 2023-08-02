@@ -54,6 +54,5 @@ function LanguageToggle({
       {displayLangToSelect}
     </LinkButton>
   );
-}
 
 export default LanguageToggle;

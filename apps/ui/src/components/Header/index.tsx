@@ -21,23 +21,22 @@ import Image, { StaticImageData } from 'next/image';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
 import { defaultLanguage, supportedLanguages } from '@/i18n/settings';
-
 import LanguageToggle from '@/components/LanguageToggle';
+import OhcrnImage from '@/public/ohcrn_large.svg';
 
 import styles from './Header.module.scss';
 
-import OhcrnImage from '@/public/ohcrn_large.svg';
 import HelpButton from './HelpButton';
 
 export const getUnselectedLang = (lang: ValidLanguage): string => {
-  return supportedLanguages.filter((l) => l !== lang)[0];
+	return supportedLanguages.filter((l) => l !== lang)[0];
 };
 
 const icons: {
-  [k in ValidLanguage]: StaticImageData;
+	[k in ValidLanguage]: StaticImageData;
 } = {
-  en: OhcrnImage,
-  fr: OhcrnImage, // TODO: get FR icon
+	en: OhcrnImage,
+	fr: OhcrnImage, // TODO: get FR icon
 };
 
 const Header = async ({ lang }: { lang: ValidLanguage }) => {

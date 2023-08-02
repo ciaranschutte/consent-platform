@@ -18,11 +18,11 @@
  */
 import { Montserrat } from 'next/font/google';
 
-import '../globals.css';
-
 import { ValidLanguage } from '@/i18n';
 import { supportedLanguages } from '@/i18n/settings';
 import PageLayout from '@/components/PageLayout';
+
+import '../globals.css';
 
 export const montserrat = Montserrat({
   subsets: ['latin'],
@@ -30,27 +30,27 @@ export const montserrat = Montserrat({
 });
 
 export async function generateStaticParams() {
-  return supportedLanguages.map((lang) => ({ lang }));
+	return supportedLanguages.map((lang) => ({ lang }));
 }
 
 // TODO: translate metadata
 export const metadata = {
-  title: 'OHCRN - Homepage',
-  description: 'Landing page for OHCRN Patient Enrolment Portal',
+	title: 'OHCRN - Homepage',
+	description: 'Landing page for OHCRN Patient Enrolment Portal',
 };
 
 export default async function RootLayout({
-  children,
-  params: { lang },
+	children,
+	params: { lang },
 }: {
-  children: React.ReactNode;
-  params: { lang: ValidLanguage };
+	children: React.ReactNode;
+	params: { lang: ValidLanguage };
 }) {
-  return (
-    <html lang={lang}>
-      <body className={`${montserrat.className}`}>
-        <PageLayout lang={lang}>{children}</PageLayout>
-      </body>
-    </html>
-  );
+	return (
+		<html lang={lang}>
+			<body className={`${montserrat.className}`}>
+				<PageLayout lang={lang}>{children}</PageLayout>
+			</body>
+		</html>
+	);
 }

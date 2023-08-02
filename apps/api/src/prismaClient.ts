@@ -17,12 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import {
-  PrismaClient,
-  ParticipantResponse,
-  Participant,
-  ConsentQuestion,
-} from '@prisma/client';
+import { PrismaClient, ParticipantResponse, Participant, ConsentQuestion } from '@prisma/client';
 
 console.log('Initializing prismaClient.ts');
 const prisma = new PrismaClient();

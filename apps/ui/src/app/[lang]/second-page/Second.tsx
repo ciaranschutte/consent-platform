@@ -22,13 +22,13 @@ import Link from 'next/link';
 import { getTranslation, ValidLanguage } from '@/i18n';
 
 const Second = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'second-page');
-  return (
-    <div>
-      <h1>{translate('title')}</h1>
-      <Link href={`/${lang}`}>{translate('back-to-home')}</Link>
-    </div>
-  );
+	const translate = await getTranslation(lang, 'second-page');
+	return (
+		<div>
+			<h1>{translate('title')}</h1>
+			<Link href={`/${lang}`}>{translate('back-to-home')}</Link>
+		</div>
+	);
 };
 
 export default Second;

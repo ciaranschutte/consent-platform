@@ -20,25 +20,24 @@
 import { ValidLanguage, getTranslation } from '@/i18n';
 
 import styles from './Footer.module.scss';
-
 import Versions from './Versions';
 import Links from './Links';
 import Right from './Right';
 import Left from './Left';
 
 const Footer = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'footer');
+	const translate = await getTranslation(lang, 'footer');
 
-  return (
-    <footer className={styles.footer}>
-      <div className={styles.top}>
-        <Left translate={translate} />
-        <Right translate={translate} />
-        <Links translate={translate} />
-      </div>
-      <Versions lang={lang} />
-    </footer>
-  );
+	return (
+		<footer className={styles.footer}>
+			<div className={styles.top}>
+				<Left translate={translate} />
+				<Right translate={translate} />
+				<Links translate={translate} />
+			</div>
+			<Versions lang={lang} />
+		</footer>
+	);
 };
 
 export default Footer;

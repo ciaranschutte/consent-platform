@@ -23,21 +23,21 @@ import { User } from 'common';
 import { ValidLanguage, getTranslation } from '@/i18n';
 
 const user: User = {
-  id: '1',
-  name: 'Homer Simpson',
-  email: 'homersimpson@example.com',
+	id: '1',
+	name: 'Homer Simpson',
+	email: 'homersimpson@example.com',
 };
 
 const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang);
-  return (
-    <div>
-      <h1>{translate('title')}</h1>
-      <p>{translate('sample-text')}</p>
-      <h2>{translate('greeting', { name: user.name })}</h2>
-      <Link href={`/${lang}/second-page`}>{translate('to-second-page')}</Link>
-    </div>
-  );
+	const translate = await getTranslation(lang);
+	return (
+		<div>
+			<h1>{translate('title')}</h1>
+			<p>{translate('sample-text')}</p>
+			<h2>{translate('greeting', { name: user.name })}</h2>
+			<Link href={`/${lang}/second-page`}>{translate('to-second-page')}</Link>
+		</div>
+	);
 };
 
 export default HomeComponent;

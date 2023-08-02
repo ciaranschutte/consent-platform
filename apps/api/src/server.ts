@@ -20,17 +20,19 @@
 import { Server } from 'http';
 
 import { getAppConfig } from './config';
+
 import App from './index';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 let server: Server;
 
 (async () => {
-  const appConfig = getAppConfig();
-  console.log('Initializing server.ts');
+	const appConfig = getAppConfig();
+	console.log('Initializing server.ts');
 
-  const app = App(appConfig);
-  const port = app.get('port');
-  server = app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-  });
+	const app = App(appConfig);
+	const port = app.get('port');
+	server = app.listen(port, () => {
+		console.log(`Server listening on port ${port}`);
+	});
 })();

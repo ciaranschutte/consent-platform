@@ -21,39 +21,30 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { Translation } from '@/i18n';
-
-import styles from './Footer.module.scss';
-
 import OICRLogo from '@/public/oicr.svg';
 import InstagramLogo from '@/public/instagram.svg';
 import TwitterLogo from '@/public/twitter.svg';
 
+import styles from './Footer.module.scss';
+
 const Left = ({ translate }: { translate: Translation }) => {
-  return (
-    <div className={styles.left}>
-      <Link href="#" className={styles.icon}>
-        <Image
-          src={OICRLogo}
-          alt={translate('oicr-logo-alt')}
-          className={styles.oicr}
-        />
-      </Link>
-      <Link href="#" className={styles.icon}>
-        <Image
-          src={InstagramLogo}
-          alt={translate('instagram-logo-alt')}
-          className={styles.instagram}
-        />
-      </Link>
-      <Link href="#" className={styles.icon}>
-        <Image
-          src={TwitterLogo}
-          alt={translate('twitter-logo-alt')}
-          className={styles.twitter}
-        />
-      </Link>
-    </div>
-  );
+	return (
+		<div className={styles.left}>
+			<Link href="#" className={styles.icon}>
+				<Image src={OICRLogo} alt={translate('oicr-logo-alt')} className={styles.oicr} />
+			</Link>
+			<Link href="#" className={styles.icon}>
+				<Image
+					src={InstagramLogo}
+					alt={translate('instagram-logo-alt')}
+					className={styles.instagram}
+				/>
+			</Link>
+			<Link href="#" className={styles.icon}>
+				<Image src={TwitterLogo} alt={translate('twitter-logo-alt')} className={styles.twitter} />
+			</Link>
+		</div>
+	);
 };
 
 export default Left;
