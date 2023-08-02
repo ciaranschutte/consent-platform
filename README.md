@@ -21,16 +21,17 @@ The directory structure is as follows:
 
 ```
 .
-├── apps
-│   ├── api     <- Node.js Express API
-│   │   ├── prisma
-│   │   └── src
-│   └── ui      <- Next.js UI
-│       ├── public
-│       └── src
-└── packages
-    └── common  <- shared TypeScript type definitions
-        └── src
+├── apps/
+│   ├── consent-api/                ← Consent Platform Node.js Express API
+│   │   ├── prisma
+│   │   └── src
+│   └── consent-ui/                 ← Consent Platform Next.js UI
+│       └── src
+└── packages/
+    ├── common/                     ← Shared TypeScript Type Definitions
+    │   └── src
+    └── config/
+        └── eslint-config-ohcrn     ← Custom ESLint Config for OHCRN
 ```
 
 ### Writing Commits
@@ -51,8 +52,8 @@ To keep commit messages consistent, we use [gitmoji](https://gitmoji.dev). To ea
 
 To run the setup locally, ensure you have provided the **required** environment variables, as described in [Environment Variables](#environment-variables). Each package has an `.env.schema` file for reference.
 
-- In the [`/apps/api/` folder](./apps/api/), create an `.env` file
-- In the [`/apps/ui/` folder](./apps/ui/), create and `.env.local` file
+- In the [`/apps/consent-api/` folder](./apps/consent-api/), create an `.env` file
+- In the [`/apps/consent-ui/` folder](./apps/consent-ui/), create and `.env.local` file
 
 ## Environment Variables
 
