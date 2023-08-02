@@ -75,6 +75,8 @@ In addition to downloading VS Code, please ensure that you have the following VS
 
 > **Note:** These extensions are also listed in the `recommendations` of the [`extensions.json` file](./.vscode/extensions.json)
 
+> **Additional Note:** If you are using the [Monorepo Workspace extension](https://marketplace.visualstudio.com/items?itemName=folke.vscode-monorepo-workspace) to manage your monorepo in VS Code, you will need to ensure the config from your [`settings.json` file](./.vscode/settings.json) is included in the `"settings"` section of your `<my-workspace>.code-workspace file`, as the workspace file will override the `.vscode` file.
+
 ### Special Considerations Regarding ESLint and the Root `package.json` File
 
 Please note that we are currently specifying versions of `@typescript-eslint/parser` and `eslint-plugin-import` in the `overrides` section of the root [`package.json` file](./package.json). This was done to avoid a conflict between the version used by the `eslint-config-next` plugin and our custom ESLint configuration.
