@@ -36,9 +36,8 @@ module.exports = {
       lg: '0px 15px 10px -3px rgba(0, 0, 0, 0.1)',
     },
     breakpoints: {
-      sm: '390px',
-      md: '834px',
-      lg: '1440px',
+      sm: '480px',
+      md: '1024px',
     },
     extend: {},
   },
