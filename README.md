@@ -1,4 +1,4 @@
-# OHCRN Consent Platform
+# OHCRN Platform
 
 [![TypeScript](https://img.shields.io/badge/types-%20TypeScript-blue)](https://www.typescriptlang.org/)
 
@@ -9,7 +9,11 @@
 | **Edge**   | [![Build Status](https://jenkins.qa.cancercollaboratory.org/buildStatus/icon?job=ARGO%2Fui%2Fdevelop)](https://jenkins.qa.cancercollaboratory.org/job/ARGO/job/ui/job/develop/) |
 | **Latest** | [![Build Status](https://jenkins.qa.cancercollaboratory.org/buildStatus/icon?job=ARGO%2Fui%2Fmaster)](https://jenkins.qa.cancercollaboratory.org/job/ARGO/job/ui/job/master/)   | -->
 
-This monorepo contains the UI, API, and shared TypeScript types for the OHCRN Consent Platform - a portal through which patients can self-register and clinicians can register their patients to consent to participate in the OHCRN study.
+This repo contains the codebase for the OHCRN Platform:
+
+- Consent Platform: portal through which participants can self-register and clinicians can register their patients to consent to participate in the OHCRN study
+- Coordinator Dashboard: administrative dashboard for managing Participant consent and inputting data from clinics
+- Data Portal: interface for interacting with the OHCRN data
 
 This project is a monorepo managed by [pnpm](https://pnpm.io/motivation)
 
