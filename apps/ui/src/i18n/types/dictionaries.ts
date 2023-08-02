@@ -19,26 +19,16 @@
 
 import { ValidLanguage } from './languages';
 
-export const namespaces = [
-  'common',
-  'header',
-  'second-page',
-  'footer',
-] as const;
+export const namespaces = ['common', 'header', 'second-page', 'footer'] as const;
 export type ValidNamespace = (typeof namespaces)[number];
 
-export type Translation = (
-  k: string,
-  params?: { [key: string]: string | number }
-) => string;
+export type Translation = (k: string, params?: { [key: string]: string | number }) => string;
 
 export type GetDictionary = {
-  [k in ValidLanguage]: (
-    namespace: ValidNamespace
-  ) => Promise<{ [k: string]: string }>;
+	[k in ValidLanguage]: (namespace: ValidNamespace) => Promise<{ [k: string]: string }>;
 };
 
 export type GetTranslation = (
-  language?: ValidLanguage,
-  namespace?: ValidNamespace
+	language?: ValidLanguage,
+	namespace?: ValidNamespace,
 ) => Promise<Translation>;

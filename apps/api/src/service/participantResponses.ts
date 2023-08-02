@@ -1,23 +1,23 @@
 import prisma from '../prismaClient';
 
 export const createResponse = async ({
-  consentQuestionId,
-  participantId,
-  response,
+	consentQuestionId,
+	participantId,
+	response,
 }: {
-  consentQuestionId: string;
-  participantId: string;
-  response: boolean;
+	consentQuestionId: string;
+	participantId: string;
+	response: boolean;
 }): Promise<any> => {
-  const updateObj = {
-    consentQuestionId,
-    participantId,
-    response,
-  };
+	const updateObj = {
+		consentQuestionId,
+		participantId,
+		response,
+	};
 
-  const newResponse = await prisma.participantResponse.create({
-    data: updateObj,
-  });
+	const newResponse = await prisma.participantResponse.create({
+		data: updateObj,
+	});
 
-  return newResponse;
+	return newResponse;
 };

@@ -25,38 +25,38 @@ import { Translation } from '@/i18n';
 import styles from './Footer.module.scss';
 
 const footerLinks: { translation: string; url: string }[] = [
-  {
-    translation: 'about',
-    url: '#',
-  },
-  {
-    translation: 'help',
-    url: '#',
-  },
-  {
-    translation: 'contact',
-    url: '#',
-  },
-  {
-    translation: 'terms',
-    url: '#',
-  },
-  {
-    translation: 'privacy',
-    url: '#',
-  },
+	{
+		translation: 'about',
+		url: '#',
+	},
+	{
+		translation: 'help',
+		url: '#',
+	},
+	{
+		translation: 'contact',
+		url: '#',
+	},
+	{
+		translation: 'terms',
+		url: '#',
+	},
+	{
+		translation: 'privacy',
+		url: '#',
+	},
 ];
 
 const Links = ({ translate }: { translate: Translation }) => {
-  return (
-    <div className={clsx(styles.linkGrid, styles.links)}>
-      {footerLinks.map((link) => (
-        <Link className={styles.link} key={link.translation} href={link.url}>
-          {translate(link.translation)}
-        </Link>
-      ))}
-    </div>
-  );
+	return (
+		<div className={clsx(styles.linkGrid, styles.links)}>
+			{footerLinks.map((link) => (
+				<Link className={styles.link} key={link.translation} href={link.url}>
+					{translate(link.translation)}
+				</Link>
+			))}
+		</div>
+	);
 };
 
 export default Links;

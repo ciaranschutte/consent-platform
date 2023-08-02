@@ -21,48 +21,38 @@ import Image, { StaticImageData } from 'next/image';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
 import { defaultLanguage, supportedLanguages } from '@/i18n/settings';
-
 import LanguageToggle from '@/components/LanguageToggle';
+import OhcrnImage from '@/public/ohcrn_large.svg';
 
 import styles from './Header.module.scss';
 
-import OhcrnImage from '@/public/ohcrn_large.svg';
-
 export const getUnselectedLang = (lang: ValidLanguage): string => {
-  return supportedLanguages.filter((l) => l !== lang)[0];
+	return supportedLanguages.filter((l) => l !== lang)[0];
 };
 
 const icons: {
-  [k in ValidLanguage]: StaticImageData;
+	[k in ValidLanguage]: StaticImageData;
 } = {
-  en: OhcrnImage,
-  fr: OhcrnImage, // TODO: get FR icon
+	en: OhcrnImage,
+	fr: OhcrnImage, // TODO: get FR icon
 };
 
 const Header = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'header');
-  const langToSelect = getUnselectedLang(lang);
+	const translate = await getTranslation(lang, 'header');
+	const langToSelect = getUnselectedLang(lang);
 
-  const icon = icons[lang || defaultLanguage];
-  return (
-    <header className={styles.header}>
-      <Link href={`/${lang}`}>
-        <Image
-          src={icon}
-          priority
-          alt={translate('logo-alt-text')}
-          className={styles.logo}
-        />
-      </Link>
+	const icon = icons[lang || defaultLanguage];
+	return (
+		<header className={styles.header}>
+			<Link href={`/${lang}`}>
+				<Image src={icon} priority alt={translate('logo-alt-text')} className={styles.logo} />
+			</Link>
 
-      <LanguageToggle
-        displayLangToSelect={translate(langToSelect)}
-        selected={lang}
-      >
-        {translate(lang)}
-      </LanguageToggle>
-    </header>
-  );
+			<LanguageToggle displayLangToSelect={translate(langToSelect)} selected={lang}>
+				{translate(lang)}
+			</LanguageToggle>
+		</header>
+	);
 };
 
 export default Header;
