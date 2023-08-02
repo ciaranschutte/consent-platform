@@ -24,10 +24,9 @@ import PageLayout from '@/components/PageLayout';
 
 import '../globals.css';
 
-const montserrat = Montserrat({
+export const montserrat = Montserrat({
 	subsets: ['latin'],
-	display: 'swap',
-	variable: '--font-montserrat',
+	variable: '--font-sans',
 });
 
 export async function generateStaticParams() {

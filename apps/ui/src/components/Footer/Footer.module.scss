@@ -5,12 +5,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: theme('fontSize.sm');
+  font-size: theme('fontSize.base');
   flex-wrap: wrap;
   height: 581px;
   @media (min-width: theme('screens.md')) {
     height: 257px;
     flex-wrap: nowrap;
+    font-size: theme('fontSize.sm');
   }
   @media (min-width: theme('screens.lg')) {
     height: 162px;
@@ -106,7 +107,7 @@
 
 .oicr {
   height: 83px;
-  width: 114px;
+  width: auto;
   margin-bottom: 1rem;
   @media (min-width: theme('screens.md')) {
     margin-right: 1rem;
@@ -117,12 +118,12 @@
 
 .instagram {
   height: 40px;
-  width: 40px;
+  width: auto;
 }
 
 .twitter {
   height: 40px;
-  width: 40px;
+  width: auto;
 }
 
 .overture {
