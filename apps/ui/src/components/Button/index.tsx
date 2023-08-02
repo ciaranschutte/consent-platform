@@ -18,41 +18,36 @@
  */
 
 import { ReactNode } from 'react';
-import styles from './Button.module.scss';
 import clsx from 'clsx';
+
+import styles from './Button.module.scss';
 
 export type ButtonVariant = 'primary' | 'secondary';
 export type ButtonColor = 'default' | 'blue' | 'green';
 export interface ButtonProps {
-  children: ReactNode;
-  onClick: (e: React.SyntheticEvent<HTMLElement>) => any;
-  variant?: ButtonVariant;
-  color?: ButtonColor;
-  disabled?: boolean;
-  className?: string;
+	children: ReactNode;
+	onClick: (e: React.SyntheticEvent<HTMLElement>) => any;
+	variant?: ButtonVariant;
+	color?: ButtonColor;
+	disabled?: boolean;
+	className?: string;
 }
 const Button = ({
-  children,
-  onClick,
-  variant = 'primary',
-  color = 'default',
-  disabled = false,
-  className = '',
+	children,
+	onClick,
+	variant = 'primary',
+	color = 'default',
+	disabled = false,
+	className = '',
 }: ButtonProps) => {
-  return (
-    <button
-      className={clsx(
-        styles.base,
-        styles[variant],
-        styles[color],
-        disabled,
-        styles[className]
-      )}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  );
+	return (
+		<button
+			className={clsx(styles.base, styles[variant], styles[color], disabled, styles[className])}
+			onClick={onClick}
+		>
+			{children}
+		</button>
+	);
 };
 
 export default Button;

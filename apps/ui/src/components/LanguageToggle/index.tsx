@@ -25,34 +25,32 @@ import { ValidLanguage } from '@/i18n';
 import { getUnselectedLang } from '@/components/Header';
 import LinkButton from '@/components/Button/LinkButton';
 
-export const replaceLocaleInUrl = (
-  path: string,
-  currentLang: string = 'en'
-): string => {
-  const unselectedLang = getUnselectedLang(currentLang as ValidLanguage);
-  const splitPath = path.split('/');
-  if (!splitPath.length) {
-    return defaultLanguage;
-  }
-  const originalLangRemoved = splitPath.slice(2).filter((item) => item.length);
-  const joinedPath = [unselectedLang].concat(originalLangRemoved).join('/');
-  return joinedPath;
+export const replaceLocaleInUrl = (path: string, currentLang: string = 'en'): string => {
+	const unselectedLang = getUnselectedLang(currentLang as ValidLanguage);
+	const splitPath = path.split('/');
+	if (!splitPath.length) {
+		return defaultLanguage;
+	}
+	const originalLangRemoved = splitPath.slice(2).filter((item) => item.length);
+	const joinedPath = [unselectedLang].concat(originalLangRemoved).join('/');
+	return joinedPath;
 };
 
 function LanguageToggle({
-  currentLang,
-  displayLangToSelect,
+	currentLang,
+	displayLangToSelect,
 }: {
-  currentLang: { lang: ValidLanguage; translated: string };
-  displayLangToSelect: string;
+	currentLang: { lang: ValidLanguage; translated: string };
+	displayLangToSelect: string;
 }) {
-  const path = usePathname();
-  const newPath = replaceLocaleInUrl(path, currentLang.lang);
+	const path = usePathname();
+	const newPath = replaceLocaleInUrl(path, currentLang.lang);
 
-  return (
-    <LinkButton href={newPath} color="blue" className="font-bold">
-      {displayLangToSelect}
-    </LinkButton>
-  );
+	return (
+		<LinkButton href={newPath} color="blue" className="font-bold">
+			{displayLangToSelect}
+		</LinkButton>
+	);
+}
 
 export default LanguageToggle;

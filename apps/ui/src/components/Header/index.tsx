@@ -25,7 +25,6 @@ import LanguageToggle from '@/components/LanguageToggle';
 import OhcrnImage from '@/public/ohcrn_large.svg';
 
 import styles from './Header.module.scss';
-
 import HelpButton from './HelpButton';
 
 export const getUnselectedLang = (lang: ValidLanguage): string => {
@@ -40,41 +39,36 @@ const icons: {
 };
 
 const Header = async ({ lang }: { lang: ValidLanguage }) => {
-  const translate = await getTranslation(lang, 'header');
-  const langToSelect = getUnselectedLang(lang);
+	const translate = await getTranslation(lang, 'header');
+	const langToSelect = getUnselectedLang(lang);
 
-  const icon = icons[lang || defaultLanguage];
-  return (
-    <header className={styles.header}>
-      <div>
-        <Link href={`/${lang}`}>
-          <Image
-            src={icon}
-            priority
-            alt={translate('logo-alt-text')}
-            className={styles.logo}
-          />
-        </Link>
-      </div>
-      <div className={styles.right}>
-        <div className={styles['hide-on-mobile']}>
-          <LanguageToggle
-            displayLangToSelect={translate(langToSelect)}
-            currentLang={{ lang, translated: translate(lang) }}
-          />
-        </div>
-        {/* TODO: implement real help button, ticket TBD */}
-        <div className={styles['hide-on-mobile']}>
-          <HelpButton />
-        </div>
-        {/* TODO: implement mobile language toggle inside user menu in separate PR for https://github.com/OHCRN/consent-platform/issues/16 */}
-        {/* TODO: implement user menu, ticket TBD */}
-        <div className={styles['user-menu']}>
-          <div>Hello, User</div>
-        </div>
-      </div>
-    </header>
-  );
+	const icon = icons[lang || defaultLanguage];
+	return (
+		<header className={styles.header}>
+			<div>
+				<Link href={`/${lang}`}>
+					<Image src={icon} priority alt={translate('logo-alt-text')} className={styles.logo} />
+				</Link>
+			</div>
+			<div className={styles.right}>
+				<div className={styles['hide-on-mobile']}>
+					<LanguageToggle
+						displayLangToSelect={translate(langToSelect)}
+						currentLang={{ lang, translated: translate(lang) }}
+					/>
+				</div>
+				{/* TODO: implement real help button, ticket TBD */}
+				<div className={styles['hide-on-mobile']}>
+					<HelpButton />
+				</div>
+				{/* TODO: implement mobile language toggle inside user menu in separate PR for https://github.com/OHCRN/consent-platform/issues/16 */}
+				{/* TODO: implement user menu, ticket TBD */}
+				<div className={styles['user-menu']}>
+					<div>Hello, User</div>
+				</div>
+			</div>
+		</header>
+	);
 };
 
 export default Header;
