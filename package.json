@@ -1,5 +1,5 @@
 {
-  "name": "test-monorepo",
+  "name": "ohcrn-platform",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,8 @@
     "build": "pnpm -r --stream run build",
     "dev": "pnpm -r --stream run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate-dev": "pnpm --filter api run migrate-dev",
-    "generate": "pnpm --filter api run generate",
+    "migrate-dev": "pnpm --filter consent-api run migrate-dev",
+    "generate": "pnpm --filter consent-api run generate",
     "start": "pnpm run migrate-dev && pnpm run dev"
   },
   "keywords": [],
