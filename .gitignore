@@ -58,7 +58,9 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # ignore vscode workspace settings
 *.code-workspace
-.vscode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/*.schema.json
 
 # ignore test output
 .nyc_output/

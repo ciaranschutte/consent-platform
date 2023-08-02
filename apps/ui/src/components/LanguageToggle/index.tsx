@@ -26,50 +26,47 @@ import { defaultLanguage } from '@/i18n/settings';
 import { ValidLanguage } from '@/i18n';
 import { getUnselectedLang } from '@/components/Header';
 
-const replaceLocaleInUrl = (
-  path: string,
-  currentLang: string = 'en'
-): string => {
-  const unselectedLang = getUnselectedLang(currentLang as ValidLanguage);
-  const splitPath = path.split('/');
-  if (!splitPath.length) {
-    return defaultLanguage;
-  }
-  const originalLangRemoved = splitPath.slice(2).filter((item) => item.length);
-  const joinedPath = [unselectedLang].concat(originalLangRemoved).join('/');
-  return joinedPath;
+const replaceLocaleInUrl = (path: string, currentLang: string = 'en'): string => {
+	const unselectedLang = getUnselectedLang(currentLang as ValidLanguage);
+	const splitPath = path.split('/');
+	if (!splitPath.length) {
+		return defaultLanguage;
+	}
+	const originalLangRemoved = splitPath.slice(2).filter((item) => item.length);
+	const joinedPath = [unselectedLang].concat(originalLangRemoved).join('/');
+	return joinedPath;
 };
 
 function LanguageToggle({
-  selected,
-  displayLangToSelect,
-  children,
+	selected,
+	displayLangToSelect,
+	children,
 }: {
-  selected: string;
-  displayLangToSelect: string;
-  children: ReactNode;
+	selected: string;
+	displayLangToSelect: string;
+	children: ReactNode;
 }) {
-  const path = usePathname();
-  const [showList, setShowList] = useState<boolean>(false);
-  const newPath = replaceLocaleInUrl(path, selected);
-  return (
-    <div>
-      <button onClick={() => setShowList(!showList)}>{children}</button>
-      {showList && (
-        <Link
-          style={{
-            display: 'flex',
-            flex: 1,
-            border: '1px solid black',
-            width: '150px',
-          }}
-          href={newPath}
-        >
-          {displayLangToSelect}
-        </Link>
-      )}
-    </div>
-  );
+	const path = usePathname();
+	const [showList, setShowList] = useState<boolean>(false);
+	const newPath = replaceLocaleInUrl(path, selected);
+	return (
+		<div>
+			<button onClick={() => setShowList(!showList)}>{children}</button>
+			{showList && (
+				<Link
+					style={{
+						display: 'flex',
+						flex: 1,
+						border: '1px solid black',
+						width: '150px',
+					}}
+					href={newPath}
+				>
+					{displayLangToSelect}
+				</Link>
+			)}
+		</div>
+	);
 }
 
 export default LanguageToggle;

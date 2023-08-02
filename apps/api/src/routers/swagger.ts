@@ -18,7 +18,7 @@
  */
 
 import { Router } from 'express';
-import swaggerUi from 'swagger-ui-express';
+import { serve, setup } from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 
 /**
@@ -43,28 +43,28 @@ import swaggerJsdoc from 'swagger-jsdoc';
  */
 
 const options = swaggerJsdoc({
-  failOnErrors: true,
-  definition: {
-    openapi: '3.1.0',
-    info: {
-      title: 'OHCRN Consent API',
-      version: '0.1.0', // TODO: Get this from package.json
-      description: '',
-      license: {
-        name: 'APGL',
-        url: 'https://www.gnu.org/licenses/agpl-3.0.en.html',
-      },
-      servers: [
-        {
-          url: '/',
-        },
-      ],
-    },
-  },
-  apis: ['./src/routers/*'],
+	failOnErrors: true,
+	definition: {
+		openapi: '3.1.0',
+		info: {
+			title: 'OHCRN Consent API',
+			version: '0.1.0', // TODO: Get this from package.json
+			description: '',
+			license: {
+				name: 'APGL',
+				url: 'https://www.gnu.org/licenses/agpl-3.0.en.html',
+			},
+			servers: [
+				{
+					url: '/',
+				},
+			],
+		},
+	},
+	apis: ['./src/routers/*'],
 });
 
 const router = Router();
-router.use('/', swaggerUi.serve, swaggerUi.setup(options));
+router.use('/', serve, setup(options));
 
 export default router;

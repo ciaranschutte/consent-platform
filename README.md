@@ -29,7 +29,7 @@ The directory structure is as follows:
         └── src
 ```
 
-### Writing commits
+### Writing Commits
 
 To keep commit messages consistent, we use [gitmoji](https://gitmoji.dev). To easily access emojis on Mac, press ctrl+cmd+space.
 
@@ -43,7 +43,7 @@ To keep commit messages consistent, we use [gitmoji](https://gitmoji.dev). To ea
   - `Cmd+Shift+B`, then select `tsc:build - tsconfig.json`
   - This will report errors in vscode's `PROBLEMS` tab -->
 
-## Local development
+## Local Development
 
 To run the setup locally, ensure you have provided the **required** environment variables, as described in [Environment Variables](#environment-variables). Each package has an `.env.schema` file for reference.
 
@@ -61,6 +61,23 @@ To run the setup locally, ensure you have provided the **required** environment 
 
 - Install pnpm: `brew install pnpm`
 - Install dependencies: `pnpm install`
+
+### VS Code Configuration
+
+[Visual Studio Code](https://code.visualstudio.com/) is the recommended code editor for this project. The monorepo contains a [`.vscode` directory](./.vscode/) with a [`settings.schema.json` file](./.vscode/settings.schema.json).
+
+Please **create a copy of the `settings.schema.json` file called `settings.json`**. This will configure VS Code with our recommended settings and enable ESLint fix-on-save, but leaves you free to configure your workspace settings to your preference without committing any changes to the repo.
+
+In addition to downloading VS Code, please ensure that you have the following VS Code Extensions:
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+> **Note:** These extensions are also listed in the `recommendations` of the [`extensions.json` file](./.vscode/extensions.json)
+
+### Special Considerations Regarding ESLint and the Root `package.json` File
+
+Please note that we are currently specifying versions of `@typescript-eslint/parser` and `eslint-plugin-import` in the `overrides` section of the root [`package.json` file](./package.json). This was done to avoid a conflict between the version used by the `eslint-config-next` plugin and our custom ESLint configuration.
 
 ## Quickstart - DB, Migrations, and Local Servers
 

@@ -21,22 +21,23 @@ import { ValidLanguage } from '@/i18n';
 import Container from '@/components/Container';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
 import styles from './PageLayout.module.scss';
 
 const PageLayout = async ({
-  children,
-  lang,
+	children,
+	lang,
 }: {
-  children: React.ReactNode;
-  lang: ValidLanguage;
+	children: React.ReactNode;
+	lang: ValidLanguage;
 }) => {
-  return (
-      <Container>
-        <Header lang={lang} />
-        <main className={styles.main}>{children}</main>
-        <Footer lang={lang} />
-      </Container>
-  );
+	return (
+		<Container>
+			<Header lang={lang} />
+			<main className={styles.main}>{children}</main>
+			<Footer lang={lang} />
+		</Container>
+	);
 };
 
 export default PageLayout;

@@ -17,13 +17,10 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Second from './Second';
 import { ValidLanguage } from '@/i18n';
 
-export default async function Page({
-  params: { lang },
-}: {
-  params: { lang: ValidLanguage };
-}) {
-  return <Second lang={lang} />;
+import Second from './Second';
+
+export default async function Page({ params: { lang } }: { params: { lang: ValidLanguage } }) {
+	return <Second lang={lang} />;
 }

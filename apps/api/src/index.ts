@@ -28,18 +28,18 @@ import ConsentQuestionRouter from './routers/consentQuestions';
 import ParticipantResponseRouter from './routers/participantResponses';
 
 const App = (config: AppConfig) => {
-  const app = express();
-  app.set('port', config.port);
-  app.use(bodyParser.json());
+	const app = express();
+	app.set('port', config.port);
+	app.use(bodyParser.json());
 
-  // set up routers
-  app.use('/api-docs', SwaggerRouter);
-  app.use('/health', HealthRouter);
-  app.use('/participants', ParticipantRouter);
-  app.use('/consent-questions', ConsentQuestionRouter);
-  app.use('/participant-responses', ParticipantResponseRouter);
+	// set up routers
+	app.use('/api-docs', SwaggerRouter);
+	app.use('/health', HealthRouter);
+	app.use('/participants', ParticipantRouter);
+	app.use('/consent-questions', ConsentQuestionRouter);
+	app.use('/participant-responses', ParticipantResponseRouter);
 
-  return app;
+	return app;
 };
 
 export default App;

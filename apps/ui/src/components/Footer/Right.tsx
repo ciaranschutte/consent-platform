@@ -21,23 +21,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { Translation } from '@/i18n';
+import ONGovtLogo from '@/public/on_govt.svg';
 
 import styles from './Footer.module.scss';
 
-import ONGovtLogo from '@/public/on_govt.svg';
-
 const Right = ({ translate }: { translate: Translation }) => {
-  return (
-    <div className={styles.right}>
-      <Link href="#">
-        <Image
-          src={ONGovtLogo}
-          alt={translate('on-govt-logo-alt')}
-          className={styles['on-gov']}
-        />
-      </Link>
-    </div>
-  );
+	return (
+		<div className={styles.right}>
+			<Link href="#">
+				<Image src={ONGovtLogo} alt={translate('on-govt-logo-alt')} className={styles['on-gov']} />
+			</Link>
+		</div>
+	);
 };
 
 export default Right;
