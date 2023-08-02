@@ -8,8 +8,11 @@
   font-size: theme('fontSize.base');
 }
 
-body {
+body,
+html {
   height: inherit;
+  @apply font-sans;
+  font-size: theme('fontSize.base');
 }
 
 h1 {
