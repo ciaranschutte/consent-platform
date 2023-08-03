@@ -7,13 +7,10 @@
   background-color: theme('colors.grayscale.100');
   padding: 0.5rem 1rem;
   align-items: center;
-  .hide-on-mobile {
-    @apply hidden;
-    @media (min-width: theme('screens.md')) {
-      @apply flex;
-      margin-right: 1rem;
-    }
-  }
+}
+
+.headerItem {
+  margin-right: 1rem;
 }
 
 .right {
@@ -23,6 +20,14 @@
   align-items: center;
 }
 
+.help {
+  @apply hidden;
+  @media (min-width: theme('screens.md')) {
+    @apply flex;
+    margin-right: 1rem;
+  }
+
+}
 .user-menu {
   border-left: 1px solid theme('colors.grayscale.400');
   padding-left: 1rem;
