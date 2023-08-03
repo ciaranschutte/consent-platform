@@ -17,18 +17,18 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage } from './languages';
+import Link from 'next/link';
 
-export const namespaces = ['common', 'header', 'footer'] as const;
-export type ValidNamespace = (typeof namespaces)[number];
+import { getTranslation, ValidLanguage } from '@/i18n';
 
-export type Translation = (k: string, params?: { [key: string]: string | number }) => string;
-
-export type GetDictionary = {
-	[k in ValidLanguage]: (namespace: ValidNamespace) => Promise<{ [k: string]: string }>;
+const ParticipantRegistration = async ({ lang }: { lang: ValidLanguage }) => {
+	const translate = await getTranslation(lang);
+	return (
+		<div>
+			<h2>{translate('participant-registration')}</h2>
+			<Link href={`/${lang}`}>{translate('home')}</Link>
+		</div>
+	);
 };
 
-export type GetTranslation = (
-	language?: ValidLanguage,
-	namespace?: ValidNamespace,
-) => Promise<Translation>;
+export default ParticipantRegistration;

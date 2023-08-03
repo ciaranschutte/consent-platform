@@ -19,8 +19,8 @@
 
 import { ValidLanguage } from '@/i18n';
 
-import Second from './Second';
+import ParticipantRegistration from '.';
 
 export default async function Page({ params: { lang } }: { params: { lang: ValidLanguage } }) {
-	return <Second lang={lang} />;
+	return <ParticipantRegistration lang={lang} />;
 }
