@@ -40,18 +40,3 @@
   background-color: theme('colors.primary.600');
   border-color: theme('colors.primary.600');
 }
-
-.full {
-  @apply hidden;
-  @media (min-width: theme('screens.md')) {
-    @apply flex;
-  }
-}
-
-.abbreviated {
-  @apply uppercase;
-  @apply flex;
-  @media (min-width: theme('screens.md')) {
-    @apply hidden;
-  }
-}

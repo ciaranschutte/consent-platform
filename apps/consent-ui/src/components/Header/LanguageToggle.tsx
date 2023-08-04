@@ -24,9 +24,10 @@ import { defaultLanguage } from '@/i18n/settings';
 import { ValidLanguage } from '@/i18n';
 import { getUnselectedLang } from '@/components/Header';
 import LinkButton from '@/components/Button/LinkButton';
-import styles from '@/components/Button/Button.module.scss';
 
-export const replaceLocaleInUrl = (path: string, currentLang: ValidLanguage = 'en'): string => {
+import styles from './Header.module.scss';
+
+const replaceLocaleInUrl = (path: string, currentLang: ValidLanguage = 'en'): string => {
 	const unselectedLang = getUnselectedLang(currentLang);
 	const splitPath = path.split('/');
 	if (!splitPath.length) {
@@ -49,8 +50,8 @@ function LanguageToggle({
 
 	return (
 		<LinkButton href={newPath} color="blue" className="font-bold">
-			<span className={styles.full}>{langToSelect.translated}</span>
-			<span className={styles.abbreviated}>{langToSelect.langAbbr}</span>
+			<span className={styles['toggle-full']}>{langToSelect.translated}</span>
+			<span className={styles['toggle-abbr']}>{langToSelect.langAbbr}</span>
 		</LinkButton>
 	);
 }
