@@ -28,6 +28,13 @@ const user: User = {
 	email: 'homersimpson@example.com',
 };
 
+// TODO: for demo purposes only, routes will be constants and translated. Will be addressed in https://github.com/OHCRN/platform/issues/34
+const paths = [
+	{ path: '/participant/registration', name: 'participant-registration' },
+	{ path: '/clinician/registration', name: 'clinician-registration' },
+	{ path: '/participant/dashboard', name: 'dashboard' },
+	{ path: '/participant/consent-forms', name: 'consent-forms' },
+];
 const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
 	const translate = await getTranslation(lang);
 	return (
@@ -35,7 +42,13 @@ const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
 			<h1>{translate('title')}</h1>
 			<p>{translate('sample-text')}</p>
 			<h2>{translate('greeting', { name: user.name })}</h2>
-			<Link href={`/${lang}/second-page`}>{translate('to-second-page')}</Link>
+			<ul>
+				{paths.map(({ path, name }) => (
+					<li key={name}>
+						<Link href={`${lang}${path}`}>{translate(name)}</Link>
+					</li>
+				))}{' '}
+			</ul>
 		</div>
 	);
 };

@@ -21,14 +21,14 @@ import Link from 'next/link';
 
 import { getTranslation, ValidLanguage } from '@/i18n';
 
-const Second = async ({ lang }: { lang: ValidLanguage }) => {
-	const translate = await getTranslation(lang, 'second-page');
+const ConsentForms = async ({ lang }: { lang: ValidLanguage }) => {
+	const translate = await getTranslation(lang);
 	return (
 		<div>
-			<h1>{translate('title')}</h1>
-			<Link href={`/${lang}`}>{translate('back-to-home')}</Link>
+			<h2>{translate('consent-forms')}</h2>
+			<Link href={`/${lang}`}>{translate('home')}</Link>
 		</div>
 	);
 };
 
-export default Second;
+export default ConsentForms;
