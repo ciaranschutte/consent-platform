@@ -21,13 +21,13 @@ import Image, { StaticImageData } from 'next/image';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
 import { defaultLanguage, supportedLanguages } from '@/i18n/settings';
-import LanguageToggle from '@/components/LanguageToggle';
+import LanguageToggle from '@/components/Header/LanguageToggle';
 import OhcrnImage from '@/public/ohcrn_large.svg';
 
 import styles from './Header.module.scss';
 import HelpButton from './HelpButton';
 
-export const getUnselectedLang = (lang: ValidLanguage): string => {
+const getUnselectedLang = (lang: ValidLanguage): ValidLanguage => {
 	return supportedLanguages.filter((l) => l !== lang)[0];
 };
 
@@ -51,20 +51,20 @@ const Header = async ({ lang }: { lang: ValidLanguage }) => {
 				</Link>
 			</div>
 			<div className={styles.right}>
-				<div className={styles['hide-on-mobile']}>
-					<LanguageToggle
-						displayLangToSelect={translate(langToSelect)}
-						currentLang={{ lang, translated: translate(lang) }}
-					/>
+				<div className={styles.headerItem}>
+					<LanguageToggle langToSelect={langToSelect}>
+						<span className={styles['toggle-full']}>{translate(langToSelect)}</span>
+						<span className={styles['toggle-abbr']}>{langToSelect}</span>
+					</LanguageToggle>
 				</div>
 				{/* TODO: implement real help button, ticket TBD */}
-				<div className={styles['hide-on-mobile']}>
+				<div className={styles.help}>
 					<HelpButton />
 				</div>
 				{/* TODO: implement mobile language toggle inside user menu in separate PR for https://github.com/OHCRN/consent-platform/issues/16 */}
 				{/* TODO: implement user menu, ticket TBD */}
 				<div className={styles['user-menu']}>
-					<div>Hello, User</div>
+					<div>Hello</div>
 				</div>
 			</div>
 		</header>
