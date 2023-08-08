@@ -19,39 +19,29 @@
 
 'use client';
 import { usePathname } from 'next/navigation';
+import { ReactNode } from 'react';
 
-import { defaultLanguage } from '@/i18n/settings';
 import { ValidLanguage } from '@/i18n';
-import { getUnselectedLang } from '@/components/Header';
 import LinkButton from '@/components/Button/LinkButton';
 
-import styles from './Header.module.scss';
-
-const replaceLocaleInUrl = (path: string, currentLang: ValidLanguage = 'en'): string => {
-	const unselectedLang = getUnselectedLang(currentLang);
-	const splitPath = path.split('/');
-	if (!splitPath.length) {
-		return defaultLanguage;
-	}
-	const originalLangRemoved = splitPath.slice(2).filter((item) => item.length);
-	const joinedPath = [unselectedLang.toString()].concat(originalLangRemoved).join('/');
-	return joinedPath;
+const getPathWithNewLocale = (locale: ValidLanguage, pathname?: string) => {
+	if (!pathname) return '/';
+	const segments = pathname.split('/');
+	segments[1] = locale;
+	return segments.join('/');
 };
 
 function LanguageToggle({
-	currentLang,
 	langToSelect,
+	children,
 }: {
-	langToSelect: { langAbbr: ValidLanguage; translated: string };
-	currentLang: { langAbbr: ValidLanguage; translated: string };
+	langToSelect: ValidLanguage;
+	children: ReactNode;
 }) {
 	const path = usePathname();
-	const newPath = replaceLocaleInUrl(path, currentLang.langAbbr);
-
 	return (
-		<LinkButton href={newPath} color="blue" className="font-bold">
-			<span className={styles['toggle-full']}>{langToSelect.translated}</span>
-			<span className={styles['toggle-abbr']}>{langToSelect.langAbbr}</span>
+		<LinkButton href={getPathWithNewLocale(langToSelect, path)} color="blue" className="font-bold">
+			{children}
 		</LinkButton>
 	);
 }

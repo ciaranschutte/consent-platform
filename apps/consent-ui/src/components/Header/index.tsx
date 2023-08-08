@@ -27,7 +27,7 @@ import OhcrnImage from '@/public/ohcrn_large.svg';
 import styles from './Header.module.scss';
 import HelpButton from './HelpButton';
 
-export const getUnselectedLang = (lang: ValidLanguage): ValidLanguage => {
+const getUnselectedLang = (lang: ValidLanguage): ValidLanguage => {
 	return supportedLanguages.filter((l) => l !== lang)[0];
 };
 
@@ -52,10 +52,10 @@ const Header = async ({ lang }: { lang: ValidLanguage }) => {
 			</div>
 			<div className={styles.right}>
 				<div className={styles.headerItem}>
-					<LanguageToggle
-						langToSelect={{ langAbbr: langToSelect, translated: translate(langToSelect) }}
-						currentLang={{ langAbbr: lang, translated: translate(lang) }}
-					/>
+					<LanguageToggle langToSelect={langToSelect}>
+						<span className={styles['toggle-full']}>{translate(langToSelect)}</span>
+						<span className={styles['toggle-abbr']}>{langToSelect}</span>
+					</LanguageToggle>
 				</div>
 				{/* TODO: implement real help button, ticket TBD */}
 				<div className={styles.help}>
