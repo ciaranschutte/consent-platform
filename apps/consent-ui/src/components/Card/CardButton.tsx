@@ -17,18 +17,21 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage } from './languages';
+'use client';
 
-export const namespaces = ['common', 'header', 'footer', 'page-consent'] as const;
-export type ValidNamespace = (typeof namespaces)[number];
+import { ReactNode } from 'react';
 
-export type Translation = (k: string, params?: { [key: string]: string | number }) => string;
+import Button from '@/components/Button';
 
-export type GetDictionary = {
-	[k in ValidLanguage]: (namespace: ValidNamespace) => Promise<{ [k: string]: string }>;
+const ImageCardButton = ({ children }: { children: ReactNode }) => {
+	const handleButton = () => {
+		alert('Clicked button');
+	};
+	return (
+		<Button color="green" variant="secondary" onClick={handleButton}>
+			{children}
+		</Button>
+	);
 };
 
-export type GetTranslation = (
-	language?: ValidLanguage,
-	namespace?: ValidNamespace,
-) => Promise<Translation>;
+export default ImageCardButton;

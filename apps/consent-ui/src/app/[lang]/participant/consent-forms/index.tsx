@@ -17,16 +17,16 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Link from 'next/link';
+import { ValidLanguage, getTranslation } from '@/i18n';
+import Card from '@/components/Card';
 
-import { getTranslation, ValidLanguage } from '@/i18n';
+import styles from './consent-forms.module.scss';
 
 const ConsentForms = async ({ lang }: { lang: ValidLanguage }) => {
-	const translate = await getTranslation(lang);
+	const translate = await getTranslation(lang, 'page-consent');
 	return (
-		<div>
-			<h2>{translate('consent-forms')}</h2>
-			<Link href={`/${lang}`}>{translate('home')}</Link>
+		<div className={styles.container}>
+			<Card translate={translate} />
 		</div>
 	);
 };

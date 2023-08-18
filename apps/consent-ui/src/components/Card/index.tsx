@@ -17,18 +17,19 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage } from './languages';
+import { Translation } from '@/i18n';
 
-export const namespaces = ['common', 'header', 'footer', 'page-consent'] as const;
-export type ValidNamespace = (typeof namespaces)[number];
+import styles from './Card.module.scss';
+import CardButton from './CardButton';
 
-export type Translation = (k: string, params?: { [key: string]: string | number }) => string;
-
-export type GetDictionary = {
-	[k in ValidLanguage]: (namespace: ValidNamespace) => Promise<{ [k: string]: string }>;
+const Card = async ({ translate }: { translate: Translation }) => {
+	return (
+		<div className={styles.card}>
+			<h2>{translate('title')}</h2>
+			<p>{translate('text')}</p>
+			<CardButton>{translate('button-complete')}</CardButton>
+		</div>
+	);
 };
 
-export type GetTranslation = (
-	language?: ValidLanguage,
-	namespace?: ValidNamespace,
-) => Promise<Translation>;
+export default Card;
