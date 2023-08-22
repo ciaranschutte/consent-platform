@@ -19,11 +19,19 @@
 
 'use client';
 
-import { createContext, useContext } from 'react';
+import { ReactNode, createContext, useContext } from 'react';
 
-const AppConfigContext = createContext({});
+import { AppConfig } from '@/getAppConfig';
 
-export const AppConfigProvider = ({ children, config }: { children: any; config: any }) => {
+const AppConfigContext = createContext({} as AppConfig);
+
+export const AppConfigProvider = ({
+	children,
+	config,
+}: {
+	children: ReactNode;
+	config: AppConfig;
+}) => {
 	return <AppConfigContext.Provider value={config}>{children}</AppConfigContext.Provider>;
 };
 
@@ -31,7 +39,7 @@ export const useAppConfigContext = () => useContext(AppConfigContext);
 
 // without this component wrapping, we can't divide into Server + Client parts
 // a context provider, React.context etc needs to be a client component
-const AppConfig = ({ children, config }: { children: any; config: any }) => (
+const AppConfig = ({ children, config }: { children: ReactNode; config: AppConfig }) => (
 	<AppConfigProvider config={config}>{children}</AppConfigProvider>
 );
 

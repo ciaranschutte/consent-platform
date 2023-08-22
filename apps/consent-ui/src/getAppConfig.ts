@@ -17,12 +17,14 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-const getAppConfig = (): {
+export type AppConfig = {
 	BASE_URL: string;
 	TEST_RUNTIME_VAR: string;
 	NEXT_PUBLIC_CONSENT_API_URL: string;
 	NEXT_PUBLIC_FEATURE_FLAG: boolean;
-} => ({
+};
+
+const getAppConfig = (): AppConfig => ({
 	BASE_URL: process.env.BASE_URL || '',
 	TEST_RUNTIME_VAR: process.env.TEST_RUNTIME_VAR || '',
 	NEXT_PUBLIC_CONSENT_API_URL: process.env.NEXT_PUBLIC_CONSENT_API_URL || '',

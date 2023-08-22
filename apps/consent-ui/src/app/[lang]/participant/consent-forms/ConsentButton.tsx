@@ -19,12 +19,17 @@
 
 'use client';
 
+import { useAppConfigContext } from '@/components/AppConfig';
 import Button from '@/components/Button';
 
-const ConsentButton = ({ isComplete }: { isComplete: boolean }) => (
-	<Button variant={isComplete ? 'secondary' : 'primary'} color="green" onClick={() => {}}>
-		{isComplete ? 'Download Consent PDF' : 'Complete Consent Forms'}
-	</Button>
-);
+const ConsentButton = ({ isComplete }: { isComplete: boolean }) => {
+	const appConfig = useAppConfigContext();
+	return (
+		<Button variant={isComplete ? 'secondary' : 'primary'} color="green" onClick={() => {}}>
+			{isComplete ? 'Download Consent PDF' : 'Complete Consent Forms'}
+			{appConfig.NEXT_PUBLIC_FEATURE_FLAG && ' 🔥'}
+		</Button>
+	);
+};
 
 export default ConsentButton;
