@@ -20,11 +20,16 @@
 import ConsentButton from './ConsentButton';
 
 const getData = async () => {
+	// opt out of cache & memo
+	const { signal } = new AbortController();
+	const cache = 'no-store';
 	const url = 'http://localhost:8080/consent-completion';
-	const response = await fetch(url);
+	const response = await fetch(url, { signal, cache });
 	const jsonResponse = await response.json();
 	return jsonResponse;
 };
+
+// this has to be a server component because it makes a fetch request
 
 const ConsentForms = async () => {
 	const completionData = await getData();
