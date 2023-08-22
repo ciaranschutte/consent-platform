@@ -17,10 +17,8 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage } from '@/i18n';
-
 import ConsentForms from '.';
 
-export default async function Page({ params: { lang } }: { params: { lang: ValidLanguage } }) {
-	return <ConsentForms lang={lang} />;
+export default async function Page() {
+	return <ConsentForms />;
 }

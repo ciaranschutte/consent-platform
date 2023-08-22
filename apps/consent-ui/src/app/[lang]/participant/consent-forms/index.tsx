@@ -17,16 +17,21 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ValidLanguage, getTranslation } from '@/i18n';
-import Card from '@/components/Card';
+import ConsentButton from './ConsentButton';
 
-import styles from './consent-forms.module.scss';
+const getData = async () => {
+	const url = 'http://localhost:8080/consent-completion';
+	const response = await fetch(url);
+	const jsonResponse = await response.json();
+	return jsonResponse;
+};
 
-const ConsentForms = async ({ lang }: { lang: ValidLanguage }) => {
-	const translate = await getTranslation(lang, 'page-consent');
+const ConsentForms = async () => {
+	const completionData = await getData();
+	const isComplete = completionData.status === 'COMPLETE';
 	return (
-		<div className={styles.container}>
-			<Card translate={translate} />
+		<div>
+			<ConsentButton isComplete={isComplete} />
 		</div>
 	);
 };

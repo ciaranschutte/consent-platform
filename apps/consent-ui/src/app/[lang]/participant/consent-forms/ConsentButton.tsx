@@ -17,19 +17,14 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { Translation } from '@/i18n';
+'use client';
 
-import styles from './Card.module.scss';
-import CardButton from './CardButton';
+import Button from '@/components/Button';
 
-const Card = async ({ translate }: { translate: Translation }) => {
-	return (
-		<div className={styles.card}>
-			<h2>{translate('title')}</h2>
-			<p>{translate('text')}</p>
-			<CardButton>{translate('button-complete')}</CardButton>
-		</div>
-	);
-};
+const ConsentButton = ({ isComplete }: { isComplete: boolean }) => (
+	<Button variant={isComplete ? 'secondary' : 'primary'} color="green" onClick={() => {}}>
+		{isComplete ? 'Download Consent PDF' : 'Complete Consent Forms'}
+	</Button>
+);
 
-export default Card;
+export default ConsentButton;
