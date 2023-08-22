@@ -21,6 +21,8 @@
 
 import Button from '@/components/Button';
 
+// this has to be a client component because it has on-click
+
 const ConsentButton = ({ isComplete }: { isComplete: boolean }) => (
 	<Button variant={isComplete ? 'secondary' : 'primary'} color="green" onClick={() => {}}>
 		{isComplete ? 'Download Consent PDF' : 'Complete Consent Forms'}
