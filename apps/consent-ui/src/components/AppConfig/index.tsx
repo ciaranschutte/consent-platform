@@ -17,46 +17,22 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { Montserrat } from 'next/font/google';
+'use client';
 
-import { ValidLanguage } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
-import PageLayout from '@/components/PageLayout';
-import AppConfig from '@/components/AppConfig';
-import { getAppClientConfig } from '@/components/AppConfig/utils';
+import { createContext, useContext } from 'react';
 
-import '../globals.css';
+const AppConfigContext = createContext({});
 
-export const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-sans',
-});
-
-export async function generateStaticParams() {
-	return supportedLanguages.map((lang) => ({ lang }));
-}
-
-// TODO: translate metadata
-export const metadata = {
-	title: 'OHCRN - Homepage',
-	description: 'Landing page for OHCRN Patient Enrolment Portal',
+export const AppConfigProvider = ({ children, config }: { children: any; config: any }) => {
+	return <AppConfigContext.Provider value={config}>{children}</AppConfigContext.Provider>;
 };
 
-export default async function RootLayout({
-	children,
-	params: { lang },
-}: {
-	children: React.ReactNode;
-	params: { lang: ValidLanguage };
-}) {
-	const appClientConfig = await getAppClientConfig();
-	return (
-		<html lang={lang}>
-			<body className={`${montserrat.className}`}>
-				<AppConfig config={appClientConfig}>
-					<PageLayout lang={lang}>{children}</PageLayout>
-				</AppConfig>
-			</body>
-		</html>
-	);
-}
+export const useAppConfigContext = () => useContext(AppConfigContext);
+
+// without this component wrapping, we can't divide into Server + Client parts
+// a context provider, React.context etc needs to be a client component
+const AppConfig = ({ children, config }: { children: any; config: any }) => (
+	<AppConfigProvider config={config}>{children}</AppConfigProvider>
+);
+
+export default AppConfig;

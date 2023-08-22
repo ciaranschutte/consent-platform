@@ -17,46 +17,16 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { Montserrat } from 'next/font/google';
-
-import { ValidLanguage } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
-import PageLayout from '@/components/PageLayout';
-import AppConfig from '@/components/AppConfig';
-import { getAppClientConfig } from '@/components/AppConfig/utils';
-
-import '../globals.css';
-
-export const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-sans',
+const getAppConfig = (): {
+	BASE_URL: string;
+	TEST_RUNTIME_VAR: string;
+	NEXT_PUBLIC_CONSENT_API_URL: string;
+	NEXT_PUBLIC_FEATURE_FLAG: boolean;
+} => ({
+	BASE_URL: process.env.BASE_URL || '',
+	TEST_RUNTIME_VAR: process.env.TEST_RUNTIME_VAR || '',
+	NEXT_PUBLIC_CONSENT_API_URL: process.env.NEXT_PUBLIC_CONSENT_API_URL || '',
+	NEXT_PUBLIC_FEATURE_FLAG: process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true',
 });
 
-export async function generateStaticParams() {
-	return supportedLanguages.map((lang) => ({ lang }));
-}
-
-// TODO: translate metadata
-export const metadata = {
-	title: 'OHCRN - Homepage',
-	description: 'Landing page for OHCRN Patient Enrolment Portal',
-};
-
-export default async function RootLayout({
-	children,
-	params: { lang },
-}: {
-	children: React.ReactNode;
-	params: { lang: ValidLanguage };
-}) {
-	const appClientConfig = await getAppClientConfig();
-	return (
-		<html lang={lang}>
-			<body className={`${montserrat.className}`}>
-				<AppConfig config={appClientConfig}>
-					<PageLayout lang={lang}>{children}</PageLayout>
-				</AppConfig>
-			</body>
-		</html>
-	);
-}
+export default getAppConfig;

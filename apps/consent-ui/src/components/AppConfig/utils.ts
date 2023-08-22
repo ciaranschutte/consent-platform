@@ -17,46 +17,22 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { Montserrat } from 'next/font/google';
+import getAppConfig from '@/getAppConfig';
 
-import { ValidLanguage } from '@/i18n';
-import { supportedLanguages } from '@/i18n/settings';
-import PageLayout from '@/components/PageLayout';
-import AppConfig from '@/components/AppConfig';
-import { getAppClientConfig } from '@/components/AppConfig/utils';
-
-import '../globals.css';
-
-export const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-sans',
-});
-
-export async function generateStaticParams() {
-	return supportedLanguages.map((lang) => ({ lang }));
-}
-
-// TODO: translate metadata
-export const metadata = {
-	title: 'OHCRN - Homepage',
-	description: 'Landing page for OHCRN Patient Enrolment Portal',
-};
-
-export default async function RootLayout({
-	children,
-	params: { lang },
-}: {
-	children: React.ReactNode;
-	params: { lang: ValidLanguage };
-}) {
-	const appClientConfig = await getAppClientConfig();
-	return (
-		<html lang={lang}>
-			<body className={`${montserrat.className}`}>
-				<AppConfig config={appClientConfig}>
-					<PageLayout lang={lang}>{children}</PageLayout>
-				</AppConfig>
-			</body>
-		</html>
-	);
+export async function getAppClientConfig() {
+	// get environment variables for client components (AppConfig context provider)
+	// cache: "no-store" ensures it's run server side
+	// fetch isn't actually doing anything except forcing server side render
+	// it's a "blocking" data call
+	// this is a server component so we have full access to process.env and can get vars from here
+	// url cannot be root - will cause infinite loop
+	try {
+		const BASE_URL = process.env.BASE_URL || '';
+		if (!BASE_URL) throw Error('no API URL found for AppConfig');
+		await fetch(`${BASE_URL}/api`, { cache: 'no-store' });
+		return getAppConfig();
+	} catch (e) {
+		console.log('this is likely happening during "next build". catch it so it doesnt exit build');
+		console.error(e);
+	}
 }

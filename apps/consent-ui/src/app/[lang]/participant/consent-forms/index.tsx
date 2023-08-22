@@ -17,23 +17,24 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import getAppConfig from '@/getAppConfig';
+
 import ConsentButton from './ConsentButton';
 
-const getData = async () => {
+const { NEXT_PUBLIC_CONSENT_API_URL } = getAppConfig();
+
+const getConsentCompletionData = async () => {
 	// opt out of cache & memo
 	const { signal } = new AbortController();
-	const cache = 'no-store';
-	const url = 'http://localhost:8080/consent-completion';
-	const response = await fetch(url, { signal, cache });
+	const url = `${NEXT_PUBLIC_CONSENT_API_URL}/consent-completion`;
+	const response = await fetch(url, { cache: 'no-store', signal });
 	const jsonResponse = await response.json();
 	return jsonResponse;
 };
 
-// this has to be a server component because it makes a fetch request
-
 const ConsentForms = async () => {
-	const completionData = await getData();
-	const isComplete = completionData.status === 'COMPLETE';
+	const consentCompetionData = await getConsentCompletionData();
+	const isComplete = consentCompetionData.status === 'COMPLETE';
 	return (
 		<div>
 			<ConsentButton isComplete={isComplete} />

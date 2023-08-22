@@ -131,3 +131,12 @@ Verify everything is running correctly by navigating to [`http://localhost:3000`
 
 - `pnpm run dev` starts local dev servers for UI (localhost:3000) and API (localhost:8080)
 - `pnpm run build` builds type defs, production UI build, API build
+
+## Environment variables
+
+### Consent UI
+
+- Server components: use `getAppConfig()` from `src/getAppConfig.ts`
+  - Environment variables are pulled directly from `process.env`.
+- Client components: use `useAppConfigContext()` from `src/components/AppConfig.tsx`
+  - We get the environment variables on the server and pass them to a React context provider.
