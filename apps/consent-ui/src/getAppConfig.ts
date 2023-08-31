@@ -20,15 +20,15 @@
 export type AppConfig = {
 	BASE_URL: string;
 	TEST_RUNTIME_VAR: string;
-	NEXT_PUBLIC_CONSENT_API_URL: string;
-	NEXT_PUBLIC_FEATURE_FLAG: boolean;
+	CONSENT_API_URL: string;
+	FEATURE_FLAG: boolean;
 };
 
 const getAppConfig = (): AppConfig => ({
 	BASE_URL: process.env.BASE_URL || '',
 	TEST_RUNTIME_VAR: process.env.TEST_RUNTIME_VAR || '',
-	NEXT_PUBLIC_CONSENT_API_URL: process.env.NEXT_PUBLIC_CONSENT_API_URL || '',
-	NEXT_PUBLIC_FEATURE_FLAG: process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true',
+	CONSENT_API_URL: process.env.CONSENT_API_URL || '',
+	FEATURE_FLAG: process.env.FEATURE_FLAG === 'true',
 });
 
 export default getAppConfig;

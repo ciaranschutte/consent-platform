@@ -16,18 +16,17 @@
  * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+import urlJoin from 'url-join';
 
 import getAppConfig from '@/getAppConfig';
 
 import ConsentButton from './ConsentButton';
 
-const { NEXT_PUBLIC_CONSENT_API_URL } = getAppConfig();
-
 const getConsentCompletionData = async () => {
 	// opt out of cache & memo
-	const { signal } = new AbortController();
-	const url = `${NEXT_PUBLIC_CONSENT_API_URL}/consent-completion`;
-	const response = await fetch(url, { cache: 'no-store', signal });
+	const { CONSENT_API_URL } = getAppConfig();
+	const url = urlJoin(CONSENT_API_URL, 'consent-completion');
+	const response = await fetch(url, { cache: 'no-store' });
 	const jsonResponse = await response.json();
 	return jsonResponse;
 };
@@ -35,6 +34,7 @@ const getConsentCompletionData = async () => {
 const ConsentForms = async () => {
 	const consentCompetionData = await getConsentCompletionData();
 	const isComplete = consentCompetionData.status === 'COMPLETE';
+
 	return (
 		<div>
 			<ConsentButton isComplete={isComplete} />

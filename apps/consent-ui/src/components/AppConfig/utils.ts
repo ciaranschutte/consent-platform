@@ -17,6 +17,8 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import urlJoin from 'url-join';
+
 import getAppConfig from '@/getAppConfig';
 
 export async function getAppClientConfig() {
@@ -29,7 +31,7 @@ export async function getAppClientConfig() {
 	try {
 		const BASE_URL = process.env.BASE_URL || '';
 		if (!BASE_URL) throw Error('no API URL found for AppConfig');
-		await fetch(`${BASE_URL}/api`, { cache: 'no-store' });
+		await fetch(urlJoin(BASE_URL, 'api'));
 		return getAppConfig();
 	} catch (e) {
 		console.log('this is likely happening during "next build". catch it so it doesnt exit build');
