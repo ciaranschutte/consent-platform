@@ -29,7 +29,6 @@ async function runSeeders() {
 			prisma.consentQuestion.upsert({
 				where: { id: consentQuestion.id },
 				create: consentQuestion,
-				// type error if i use a map for some reason
 				update: {},
 			}),
 		),
