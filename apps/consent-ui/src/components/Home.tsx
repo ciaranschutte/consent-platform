@@ -17,10 +17,11 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Link from 'next/link';
 import { User } from 'common';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
+
+import LocalizedLink, { RouteName } from './Link/LocalizedLink';
 
 const user: User = {
 	id: '1',
@@ -29,11 +30,13 @@ const user: User = {
 };
 
 // TODO: for demo purposes only, routes will be constants and translated. Will be addressed in https://github.com/OHCRN/platform/issues/34
-const paths = [
-	{ path: '/participant/registration', name: 'participant-registration' },
-	{ path: '/clinician/registration', name: 'clinician-registration' },
-	{ path: '/participant/dashboard', name: 'dashboard' },
-	{ path: '/participant/consent-forms', name: 'consent-forms' },
+const paths: { name: RouteName }[] = [
+	// path: { en: '/participant/registration', fr: '/participant/inscription' },
+	// path: '/participant/registration',
+	{ name: 'participant-registration' },
+	{ name: 'clinician-registration' },
+	{ name: 'participant-dashboard' },
+	{ name: 'participant-consent' },
 ];
 const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
 	const translate = await getTranslation(lang);
@@ -43,9 +46,11 @@ const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
 			<p>{translate('sample-text')}</p>
 			<h2>{translate('greeting', { name: user.name })}</h2>
 			<ul>
-				{paths.map(({ path, name }) => (
+				{paths.map(({ name }) => (
 					<li key={name}>
-						<Link href={`${lang}${path}`}>{translate(name)}</Link>
+						<LocalizedLink name={name} lang={lang}>
+							{translate(name)}
+						</LocalizedLink>
 					</li>
 				))}{' '}
 			</ul>

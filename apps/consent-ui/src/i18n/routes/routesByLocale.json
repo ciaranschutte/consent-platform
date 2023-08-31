@@ -1,0 +1,16 @@
+{
+	"en": {
+		"home": "/",
+		"clinician-registration": "/clinician/registration",
+		"participant-consent": "/participant/consent-forms",
+		"participant-registration": "/participant/registration",
+		"participant-dashboard": "/participant/dashboard"
+	},
+	"fr": {
+		"home": "/",
+		"clinician-registration": "/clinicien/inscription",
+		"participant-consent": "/participant/consentement",
+		"participant-registration": "/participant/inscription",
+		"participant-dashboard": "/participant/tableau-de-bord"
+	}
+}
