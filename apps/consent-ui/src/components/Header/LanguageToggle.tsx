@@ -20,29 +20,53 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
+import clsx from 'clsx';
 
+import styles from '@/components/Button/Button.module.scss';
 import { ValidLanguage } from '@/i18n';
-import LinkButton from '@/components/Button/LinkButton';
+import routesByLocale from '@/i18n/routes/routesByLocale.json';
+import { RouteName, RouteNameEnum } from '@/components/Link/types';
 
-const getPathWithNewLocale = (locale: ValidLanguage, pathname?: string) => {
-	if (!pathname) return '/';
-	const segments = pathname.split('/');
-	segments[1] = locale;
-	return segments.join('/');
+import LocalizedLink from '../Link/LocalizedLink';
+
+import { getUnselectedLang } from '.';
+
+function getRouteNameByPath(routeObj: { [k: string]: string }, value: string): string | undefined {
+	const keys = Object.keys(routeObj);
+	return keys.find((key: string) => routeObj[key] === value);
+}
+
+const findLinkNameByPath = (path: string, lang: ValidLanguage): RouteName => {
+	if (!path) {
+		return 'home';
+	}
+	const pathSegments = path.split('/');
+	const newPath = pathSegments.slice(2).join('/');
+	const result = getRouteNameByPath(routesByLocale[lang], `/${newPath}`);
+	try {
+		const validRoute = RouteNameEnum.parse(result);
+		return validRoute;
+	} catch (e) {
+		console.error(`Invalid route name: ${result}`);
+		return 'home';
+	}
 };
 
-function LanguageToggle({
-	langToSelect,
-	children,
-}: {
-	langToSelect: ValidLanguage;
-	children: ReactNode;
-}) {
+function LanguageToggle({ lang, children }: { lang: ValidLanguage; children: ReactNode }) {
+	const langToSelect = getUnselectedLang(lang);
 	const path = usePathname();
+	const linkName = findLinkNameByPath(path, lang);
+
 	return (
-		<LinkButton href={getPathWithNewLocale(langToSelect, path)} color="blue" className="font-bold">
+		<LocalizedLink
+			name={linkName}
+			lang={langToSelect}
+			role="button"
+			color="blue"
+			className={clsx(styles.base, styles.primary, styles.blue)}
+		>
 			{children}
-		</LinkButton>
+		</LocalizedLink>
 	);
 }
 

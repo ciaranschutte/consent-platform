@@ -25,7 +25,7 @@ const Dashboard = async ({ lang }: { lang: ValidLanguage }) => {
 	const translate = await getTranslation(lang);
 	return (
 		<div>
-			<h2>{translate('dashboard')}</h2>
+			<h2>{translate('participant-dashboard')}</h2>
 			<Link href={`/${lang}`}>{translate('home')}</Link>
 		</div>
 	);

@@ -5,7 +5,7 @@
     "sample-text": "Exemple de texte pour la page de destination.",
     "home": "Page d'accueil",
     "participant-registration": "Inscription du participant",
-    "dashboard": "Tableau de bord",
-    "consent-forms": "Formulaires de consentement",
+    "participant-dashboard": "Tableau de bord",
+    "participant-consent": "Formulaires de consentement",
     "clinician-registration": "Inscription du clinicien"
 }

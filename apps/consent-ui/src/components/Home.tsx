@@ -21,7 +21,8 @@ import { User } from 'common';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
 
-import LocalizedLink, { RouteName } from './Link/LocalizedLink';
+import LocalizedLink from './Link/LocalizedLink';
+import { RouteName } from './Link/types';
 
 const user: User = {
 	id: '1',
@@ -31,13 +32,12 @@ const user: User = {
 
 // TODO: for demo purposes only, routes will be constants and translated. Will be addressed in https://github.com/OHCRN/platform/issues/34
 const paths: { name: RouteName }[] = [
-	// path: { en: '/participant/registration', fr: '/participant/inscription' },
-	// path: '/participant/registration',
 	{ name: 'participant-registration' },
 	{ name: 'clinician-registration' },
 	{ name: 'participant-dashboard' },
 	{ name: 'participant-consent' },
 ];
+
 const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
 	const translate = await getTranslation(lang);
 	return (

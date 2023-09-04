@@ -27,7 +27,7 @@ import OhcrnImage from '@/public/ohcrn_large.svg';
 import styles from './Header.module.scss';
 import HelpButton from './HelpButton';
 
-const getUnselectedLang = (lang: ValidLanguage): ValidLanguage => {
+export const getUnselectedLang = (lang: ValidLanguage): ValidLanguage => {
 	return supportedLanguages.filter((l) => l !== lang)[0];
 };
 
@@ -41,7 +41,6 @@ const icons: {
 const Header = async ({ lang }: { lang: ValidLanguage }) => {
 	const translate = await getTranslation(lang, 'header');
 	const langToSelect = getUnselectedLang(lang);
-
 	const icon = icons[lang || defaultLanguage];
 	return (
 		<header className={styles.header}>
@@ -52,7 +51,7 @@ const Header = async ({ lang }: { lang: ValidLanguage }) => {
 			</div>
 			<div className={styles.right}>
 				<div className={styles.headerItem}>
-					<LanguageToggle langToSelect={langToSelect}>
+					<LanguageToggle lang={lang}>
 						<span className={styles['toggle-full']}>{translate(langToSelect)}</span>
 						<span className={styles['toggle-abbr']}>{langToSelect}</span>
 					</LanguageToggle>

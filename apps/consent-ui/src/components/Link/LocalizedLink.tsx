@@ -18,44 +18,32 @@
  */
 
 import Link from 'next/link';
-import { ReactNode } from 'react';
 import urlJoin from 'url-join';
 
 import routesByLocale from '@/i18n/routes/routesByLocale.json';
-import { ValidLanguage } from '@/i18n';
+import { defaultLanguage } from '@/i18n/settings';
 
-export type RouteName =
-	| 'home'
-	| 'clinician-registration'
-	| 'participant-consent'
-	| 'participant-registration'
-	| 'participant-dashboard';
+import { LocalizedLinkProps } from './types';
 
-export type Route =
-	| {
-			name: 'home';
-			params?: never;
-	  }
-	| {
-			name: RouteName;
-			params?: { [k: string]: string };
-	  };
-
-type LocalizedLinkProps = {
-	lang: ValidLanguage;
-	children: ReactNode;
-} & Route;
-
-const LocalizedLink = ({ name, params, lang, children, ...rest }: LocalizedLinkProps) => {
-	const locale = lang;
-	const localeRoutes = (routesByLocale as any)[locale];
+const LocalizedLink = ({
+	name,
+	params,
+	lang,
+	className,
+	children,
+	...rest
+}: LocalizedLinkProps) => {
+	let locale = lang;
+	const localeRoutes = routesByLocale[lang];
 	if (!localeRoutes) {
-		throw new Error(`No routes found for locale "${locale}"`);
+		console.error(`No routes found for locale "${lang}"`);
+		locale = defaultLanguage;
 	}
 
-	const routePath = (localeRoutes as any)[name];
+	let routePath = localeRoutes[name];
 	if (!routePath) {
-		throw new Error(`No route found for name "${name}"`);
+		console.error(`No route found for name "${name}"`);
+		routePath = '/';
 	}
 
 	let href = routePath;
@@ -66,7 +54,7 @@ const LocalizedLink = ({ name, params, lang, children, ...rest }: LocalizedLinkP
 	}
 
 	return (
-		<Link href={urlJoin(lang, href)} {...rest}>
+		<Link href={urlJoin(locale, href)} className={className} {...rest}>
 			{children}
 		</Link>
 	);
