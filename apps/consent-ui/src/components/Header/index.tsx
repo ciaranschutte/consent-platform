@@ -24,7 +24,7 @@ import { defaultLanguage } from '@/i18n/settings';
 import LanguageToggle from '@/components/Header/LanguageToggle';
 import OhcrnImage from '@/public/ohcrn_large.svg';
 
-import { getUnselectedLang } from '../Link/utils';
+import { getUnselectedLang } from '@/components/Link/utils';
 
 import styles from './Header.module.scss';
 import HelpButton from './HelpButton';
