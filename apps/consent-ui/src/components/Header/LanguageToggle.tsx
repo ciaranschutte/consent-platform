@@ -24,14 +24,13 @@ import clsx from 'clsx';
 
 import styles from '@/components/Button/Button.module.scss';
 import { ValidLanguage } from '@/i18n';
-
 import LocalizedLink from '@/components/Link/LocalizedLink';
-import { findLinkNameByPath, getUnselectedLang } from '@/components/Link/utils';
+import { getLinkNameByPath, getUnselectedLang } from '@/components/Link/utils';
 
 function LanguageToggle({ lang, children }: { lang: ValidLanguage; children: ReactNode }) {
 	const langToSelect = getUnselectedLang(lang);
 	const path = usePathname();
-	const linkName = findLinkNameByPath(path, lang);
+	const linkName = getLinkNameByPath(path, lang);
 
 	return (
 		<LocalizedLink

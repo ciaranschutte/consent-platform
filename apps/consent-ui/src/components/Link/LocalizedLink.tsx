@@ -24,6 +24,7 @@ import routesByLocale from '@/i18n/routes/routesByLocale.json';
 import { defaultLanguage } from '@/i18n/settings';
 
 import { LocalizedLinkProps } from './types';
+import { addParamsToUrl } from './utils';
 
 const LocalizedLink = ({
 	name,
@@ -48,9 +49,7 @@ const LocalizedLink = ({
 
 	let href = routePath;
 	if (params) {
-		Object.keys(params).forEach((param) => {
-			href = href.replace(new RegExp(':' + param, 'g'), (params as any)[param]);
-		});
+		href = addParamsToUrl(href, params);
 	}
 
 	return (

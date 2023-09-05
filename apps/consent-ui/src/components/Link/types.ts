@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { ValidLanguage } from '@/i18n';
 
+export type RouteParams = { [k: string]: string };
 export type Route =
 	| {
 			name: 'home';
@@ -11,7 +12,7 @@ export type Route =
 	  }
 	| {
 			name: RouteName;
-			params?: { [k: string]: string };
+			params?: RouteParams;
 	  };
 
 export type LocalizedLinkProps = Omit<ComponentProps<typeof Link>, 'href'> &
