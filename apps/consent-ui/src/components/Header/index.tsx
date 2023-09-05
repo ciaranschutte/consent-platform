@@ -20,16 +20,14 @@ import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
 
 import { ValidLanguage, getTranslation } from '@/i18n';
-import { defaultLanguage, supportedLanguages } from '@/i18n/settings';
+import { defaultLanguage } from '@/i18n/settings';
 import LanguageToggle from '@/components/Header/LanguageToggle';
 import OhcrnImage from '@/public/ohcrn_large.svg';
 
+import { getUnselectedLang } from '../Link/utils';
+
 import styles from './Header.module.scss';
 import HelpButton from './HelpButton';
-
-export const getUnselectedLang = (lang: ValidLanguage): ValidLanguage => {
-	return supportedLanguages.filter((l) => l !== lang)[0];
-};
 
 const icons: {
 	[k in ValidLanguage]: StaticImageData;

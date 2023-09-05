@@ -32,7 +32,6 @@ export const config = {
 export function middleware(request: NextRequest) {
 	// Check if there is any supported locale in the pathname
 	const pathname = request.nextUrl.pathname;
-	console.log('pathname: ', pathname);
 	const pathnameIsMissingLocale = supportedLanguages.every(
 		(locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
 	);
@@ -40,7 +39,6 @@ export function middleware(request: NextRequest) {
 	// this setup will result in a 404 if the locale is not supported, as it will be treated as the pathname
 	// i.e. `/es` would redirect to `/en/es`
 	if (pathnameIsMissingLocale) {
-		console.log('was missing');
 		const locale = defaultLanguage;
 
 		return NextResponse.redirect(new URL(`/${locale}/${pathname}`, request.url));
