@@ -17,45 +17,12 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { User } from 'common';
+import { ConsentCategory } from 'common';
 
-import { ValidLanguage, getTranslation } from '@/i18n';
+import { ValidLanguage } from '@/i18n';
 
-import LocalizedLink from './Link/LocalizedLink';
-import { RouteName } from './Link/types';
+import ConsentForms from '.';
 
-const user: User = {
-	id: '1',
-	name: 'Homer Simpson',
-	email: 'homersimpson@example.com',
-};
-
-// TODO: for demoing localized named links, these pages will be routed to properly in a later ticket
-const paths: { name: RouteName; key?: string }[] = [
-	{ name: 'register' },
-	{ name: 'invite' },
-	{ name: 'dashboard' },
-	{ name: 'consent-1', key: 'consent' },
-];
-
-const HomeComponent = async ({ lang }: { lang: ValidLanguage }) => {
-	const translate = await getTranslation(lang);
-	return (
-		<div>
-			<h1>{translate('title')}</h1>
-			<p>{translate('sample-text')}</p>
-			<h2>{translate('greeting', { name: user.name })}</h2>
-			<ul>
-				{paths.map(({ name, key }) => (
-					<li key={name}>
-						<LocalizedLink name={name} lang={lang}>
-							{translate(key || name)}
-						</LocalizedLink>
-					</li>
-				))}{' '}
-			</ul>
-		</div>
-	);
-};
-
-export default HomeComponent;
+export default async function Page({ params: { lang } }: { params: { lang: ValidLanguage } }) {
+	return <ConsentForms lang={lang} section={ConsentCategory.enum.INFORMED_CONSENT} />;
+}

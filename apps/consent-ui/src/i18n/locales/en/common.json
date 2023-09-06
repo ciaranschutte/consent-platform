@@ -4,8 +4,14 @@
     "to-second-page": "To second page",
     "sample-text": "Sample text for the landing page.",
     "home": "Homepage",
-    "participant-registration": "Participant Registration",
-    "participant-dashboard": "Dashboard",
-    "participant-consent": "Consent Forms",
-    "clinician-registration": "Clinician Registration"
+    "register": "Participant Registration",
+    "dashboard": "Dashboard",
+    "consent": "Consent Forms",
+    "invite": "Clinician Invite",
+    "consent-forms": "Consent Forms",
+    "INFORMED_CONSENT": "Informed Consent",
+    "CONSENT_RELEASE_DATA": "Consent to Data Release ",
+    "CONSENT_RESEARCH_PARTICIPATION": "Consent to Research Participation ",
+    "CONSENT_RECONTACT": "Consent to Recontact",
+    "CONSENT_REVIEW_SIGN": "Review and Sign"
 }

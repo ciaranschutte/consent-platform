@@ -15,6 +15,16 @@ export const findRouteNameByPath = (
 	return keys.find((key: string) => routes[key] === path);
 };
 
+/**
+ * Replaces the expected parameters in the url with those provided in the LocalizedLink params prop
+ * @param {string} path - the current path
+ * @param {ValidLanguage} lang - the current language
+ * @returns {RouteName} - the name of the route in the allowed routes, defined in routesByLocale.json
+ *
+ * @example
+ * // returns 'register'
+ * getLinkNameByPath('/fr/inscription', 'fr')
+ */
 export const getLinkNameByPath = (path: string, lang: ValidLanguage): RouteName => {
 	if (!path) {
 		return 'home';
