@@ -32,7 +32,7 @@ export async function getAppClientConfig() {
 	// url cannot be root - will cause infinite loop
 	try {
 		const configResp = await fetch(BUILD_TIME_VARIABLES.RUNTIME_CONFIG_URL, {
-			cache: 'no-store',
+			next: { revalidate: 0 },
 		});
 		return await configResp.json();
 	} catch (e) {
