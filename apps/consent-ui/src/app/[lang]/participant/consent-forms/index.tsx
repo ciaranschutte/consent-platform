@@ -26,9 +26,12 @@ const getConsentCompletionData = async () => {
 	// opt out of cache & memo
 	const { CONSENT_API_URL } = getAppConfig();
 	const url = urlJoin(CONSENT_API_URL, 'consent-completion');
-	const response = await fetch(url, { next: { revalidate: 0 } });
-	const jsonResponse = await response.json();
-	return jsonResponse;
+	return await fetch(url, { next: { revalidate: 0 } })
+		.then(async (res) => await res.json())
+		.catch((e: Error) => {
+			console.log(e);
+			return {};
+		});
 };
 
 const ConsentForms = async () => {
