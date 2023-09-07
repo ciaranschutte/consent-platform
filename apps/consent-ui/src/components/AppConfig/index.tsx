@@ -23,7 +23,16 @@ import { ReactNode, createContext, useContext } from 'react';
 
 import { AppConfig } from '@/getAppConfig';
 
+const defaultContextValues = {
+	BASE_URL: 'http://localhost:3000',
+	TEST_RUNTIME_VAR: 'testingtesting',
+	CONSENT_API_URL: 'http://localhost:8080',
+	FEATURE_FLAG: true,
+	NEXT_IS_BUILDING: false,
+};
+
 const AppConfigContext = createContext({} as AppConfig);
+const DefaultAppConfigContext = createContext(defaultContextValues as AppConfig);
 
 export const AppConfigProvider = ({
 	children,
@@ -35,7 +44,13 @@ export const AppConfigProvider = ({
 	return <AppConfigContext.Provider value={config}>{children}</AppConfigContext.Provider>;
 };
 
-export const useAppConfigContext = () => useContext(AppConfigContext);
+// export const useAppConfigContext = () => useContext(AppConfigContext);
+
+export const useAppConfigContext = () => {
+	const currentContext = useContext(AppConfigContext);
+	const defaultContext = useContext(DefaultAppConfigContext);
+	return process.env.NEXT_IS_BUILDING === 'true' ? defaultContext : currentContext;
+};
 
 // without this component wrapping, we can't divide into Server + Client parts
 // a context provider, React.context etc needs to be a client component

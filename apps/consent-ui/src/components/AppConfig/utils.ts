@@ -19,7 +19,9 @@
 
 import urlJoin from 'url-join';
 
-import getAppConfig from '@/getAppConfig';
+const BUILD_TIME_VARIABLES = {
+	RUNTIME_CONFIG_URL: urlJoin(process.env.BASE_URL || '', 'api', 'config'),
+};
 
 export async function getAppClientConfig() {
 	// get environment variables for client components (AppConfig context provider)
@@ -29,12 +31,18 @@ export async function getAppClientConfig() {
 	// this is a server component so we have full access to process.env and can get vars from here
 	// url cannot be root - will cause infinite loop
 	try {
-		const BASE_URL = process.env.BASE_URL || '';
-		if (!BASE_URL) throw Error('no API URL found for AppConfig');
-		await fetch(urlJoin(BASE_URL, 'api'));
-		return getAppConfig();
+		const configResp = await fetch(BUILD_TIME_VARIABLES.RUNTIME_CONFIG_URL, {
+			cache: 'no-store',
+		});
+		return await configResp.json();
 	} catch (e) {
-		console.log('this is likely happening during "next build". catch it so it doesnt exit build');
-		console.error(e);
+		if (process.env.NEXT_IS_BUILDING === 'true') {
+			console.log(
+				"Failed to retrieve server runtime config. Colocated api route won't be available during build.",
+			);
+		} else {
+			console.error(e);
+		}
+		return {};
 	}
 }

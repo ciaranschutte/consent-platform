@@ -22,6 +22,7 @@ export type AppConfig = {
 	TEST_RUNTIME_VAR: string;
 	CONSENT_API_URL: string;
 	FEATURE_FLAG: boolean;
+	NEXT_IS_BUILDING: boolean;
 };
 
 const getAppConfig = (): AppConfig => ({
@@ -29,6 +30,7 @@ const getAppConfig = (): AppConfig => ({
 	TEST_RUNTIME_VAR: process.env.TEST_RUNTIME_VAR || '',
 	CONSENT_API_URL: process.env.CONSENT_API_URL || '',
 	FEATURE_FLAG: process.env.FEATURE_FLAG === 'true',
+	NEXT_IS_BUILDING: process.env.NEXT_IS_BUILDING === 'true',
 });
 
 export default getAppConfig;

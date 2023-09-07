@@ -17,10 +17,11 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 
+import getAppConfig from '@/getAppConfig';
+
 export async function GET() {
-	headers();
-	return NextResponse.json('placeholder route for AppConfig');
+	const appConfig = getAppConfig();
+	return NextResponse.json(appConfig);
 }
